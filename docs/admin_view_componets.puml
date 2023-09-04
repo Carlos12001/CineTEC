@@ -1,0 +1,27 @@
+@startuml
+package "Vista Administrador" {
+
+  [LoginComponent]
+  [ClienteRegistrationComponent]
+  [PeliculaRegistrationComponent]
+  [SucursalRegistrationComponent]
+  [SalaRegistrationComponent]
+  [ProyeccionAssignmentComponent]
+  [RestriccionesComponent]
+
+  note right of LoginComponent: Permite a los administradores\nautenticarse e ingresar al sistema.
+
+  note right of ClienteRegistrationComponent: Gestionar información de clientes:\n- Nombre\n- Cédula\n- Número de teléfono\n- Fecha de nacimiento\n- Edad
+
+  note right of PeliculaRegistrationComponent: Gestionar información de películas:\n- Nombre original\n- Nombre comercial\n- Imagen\n- Duración\n- Protagonistas\n- Director\n- Clasificación
+
+  note right of SucursalRegistrationComponent: Gestionar sucursales de cine:\n- Nombre del cine\n- Ubicación\n- Cantidad de salas
+
+  note right of SalaRegistrationComponent: Gestionar salas de cine:\n- Identificador\n- Nombre de sucursal\n- Cantidad de filas, columnas, espacios\n- Capacidad
+
+  note right of ProyeccionAssignmentComponent: Asignar proyecciones de películas a salas\nen momentos específicos.
+
+  note right of RestriccionesComponent: Configurar restricciones sanitarias\ny aforo máximo permitido.
+
+}
+@enduml

@@ -1,0 +1,89 @@
+@startuml
+
+package "Vista Cliente" {
+
+class CineSeleccionComponent {
++selectCine(cine: Sucursal): void
+}
+
+class PeliculaSeleccionComponent {
++selectPelicula(pelicula: Pelicula): void
+}
+
+class ProyeccionSeleccionComponent {
++selectProyeccion(proyeccion: Proyeccion): void
+}
+
+class AsientoSeleccionComponent {
++selectAsiento(asiento: Asiento): void
++markAsiento(asiento: Asiento, status: AsientoStatus): void
+}
+
+class FacturaGeneracionComponent {
++generateFactura(selection: UserSelection): void
++generateXML(): XML
++generatePDF(): PDF
+}
+
+class Sucursal {
+-nombre: String
+-ubicacion: String
+-cantidadSalas: int
+
+}
+
+class Pelicula {
+-nombreOriginal: String
+-nombreComercial: String
+-imagen: String
+-duracion: int //En minutos
+-protagonistas: String[]
+-director: String
+-clasificacion: String
+
+}
+
+class Proyeccion {
+-pelicula: Pelicula
+-sucursal: Sucursal
+-horaInicio: Date
+-horaFin: Date
+
+}
+
+class Asiento {
+-fila: number
+-columna: number
+-status: AsientoStatus
+}
+
+class UserSelection {
+-cine: Sucursal
+-pelicula: Pelicula
+-proyeccion: Proyeccion
+-asientos: Asiento[]
+}
+
+enum AsientoStatus {
+OCUPADO
+DESOCUPADO
+RESTRINGIDO
+}
+
+' Asociaciones
+CineSeleccionComponent --> PeliculaSeleccionComponent : Accede
+PeliculaSeleccionComponent --> ProyeccionSeleccionComponent : Accede
+ProyeccionSeleccionComponent --> AsientoSeleccionComponent : Accede
+AsientoSeleccionComponent --> FacturaGeneracionComponent : Accede
+
+CineSeleccionComponent o-- Sucursal: Selecciona
+PeliculaSeleccionComponent o-- Pelicula: Selecciona
+ProyeccionSeleccionComponent o-- Proyeccion: Selecciona
+AsientoSeleccionComponent o-- Asiento: Selecciona
+
+FacturaGeneracionComponent --> UserSelection: Genera factura de
+Asiento --> AsientoStatus: Usa
+
+}
+
+@enduml

@@ -1,0 +1,114 @@
+@startuml
+
+package "Vista Administrador" {
+
+class LoginComponent {
++authenticate(username: string, password: string): void
+}
+
+class ClienteComponent {
++createCliente(cliente: Cliente): void
++updateCliente(cliente: Cliente): void
++deleteCliente(clienteID: string): void
++getCliente(clienteID: string): Cliente
+}
+
+class PeliculaComponent {
++createPelicula(pelicula: Pelicula): void
++updatePelicula(pelicula: Pelicula): void
++deletePelicula(peliculaID: string): void
++getPelicula(peliculaID: string): Pelicula
+}
+
+class SucursalComponent {
++createSucursal(sucursal: Sucursal): void
++updateSucursal(sucursal: Sucursal): void
++deleteSucursal(sucursalID: string): void
++getSucursal(sucursalID: string): Sucursal
+}
+
+class SalaComponent {
++createSala(sala: Sala): void
++updateSala(sala: Sala): void
++deleteSala(salaID: string): void
++getSala(salaID: string): Sala
+}
+
+class ProyeccionComponent {
++createProyeccion(proyeccion: Proyeccion): void
++updateProyeccion(proyeccion: Proyeccion): void
++deleteProyeccion(proyeccionID: string): void
++getProyeccion(proyeccionID: string): Proyeccion
+}
+
+class RestriccionesComponent {
++getRestricciones(): Restriccion[]
++setRestricciones(restricciones: Restriccion[]): void
+}
+
+class Cliente {
+-nombre: string
+-cedula: string
+-telefono: string
+-fechaNacimiento: Date
+-edad: number
+}
+
+class Pelicula {
+-nombreOriginal: string
+-nombreComercial: string
+-imagen: Image
+-duracion: number
+-protagonistas: string
+-director: string
+-clasificacion: string
+}
+
+class Sucursal {
+-nombre: string
+-ubicacion: string
+-cantidadSalas: number
+}
+
+class Sala {
+-identificador: string
+-nombreSucursal: string
+-filas: number
+-columnas: number
+-capacidad: number
+}
+
+class Proyeccion {
+-sala: Sala
+-pelicula: Pelicula
+-fechaHora: Date
+}
+
+class Restriccion {
+-restriccionId: string
+-descripcion: string
+-aforoMaximo: number
+}
+
+' Asociaciones
+LoginComponent --> ClienteComponent : Accede
+LoginComponent --> PeliculaComponent : Accede
+LoginComponent --> SucursalComponent : Accede
+LoginComponent --> SalaComponent : Accede
+LoginComponent --> ProyeccionComponent : Accede
+LoginComponent --> RestriccionesComponent : Accede
+
+SucursalComponent o-- Sucursal: Gestiona
+ClienteComponent o-- Cliente: Gestiona
+PeliculaComponent o-- Pelicula: Gestiona
+SalaComponent o-- Sala: Gestiona
+ProyeccionComponent o-- Proyeccion: Gestiona
+
+' Asociación entre entidades
+Proyeccion --> Pelicula : Tiene
+Proyeccion --> Sala : Se proyecta en
+Sala --> Sucursal: Pertenece a
+RestriccionesComponent o-- Restriccion: Consulta/Establece
+}
+
+@enduml
