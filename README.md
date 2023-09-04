@@ -25,7 +25,7 @@ To develop a prototype that allows the handling of the case description as
 1. Create an API/REST Service (C#-.Net) and establish a connection with the
 Front End for at least one post, a single value Get, and a multivalue Get.
 1. Create a prototype of a multi-view webpage.
-1. Utilize tools such as Angular/React, Bootstrap, HTML5, CSS3, Crystal Report,
+1. Utilize tools such as Angular, Bootstrap, HTML5, CSS3, Crystal Report,
  Reporting Services, or another reporting tool.
 1. Install a local web application in a Windows environment on IIS (Front End
  and Back End).
