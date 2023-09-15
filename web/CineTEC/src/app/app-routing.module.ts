@@ -7,21 +7,20 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path:'admin', children: [
-    { path:'', redirectTo:'', pathMatch: 'full'},
-    { path:'login', component: AdminLoginComponent},
-    { path:'**', redirectTo:'login'}
-  ]},
-  { path:'**', redirectTo:'/home'}
+  {
+    path: 'admin',
+    children: [
+      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: 'login', component: AdminLoginComponent },
+      { path: '**', redirectTo: 'login' },
+    ],
+  },
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
-  exports: [RouterModule]
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}
