@@ -7,10 +7,10 @@ namespace CineTec.Models
 {
     public class Room
     {
-        public int RoomID { get; set; }
-        public int RowsNumber { get; set; }
-        public int ColumnsNumber { get; set; }
-        public string TheaterName { get; set; }
-        public List<int> ProjectionID { get; set; }
+        public int id { get; set; }
+        public int rows { get; set; }
+        public int columns { get; set; }
+        public string name { get; set; }
+        public List<int> projectionid { get; set; }
     }
 }

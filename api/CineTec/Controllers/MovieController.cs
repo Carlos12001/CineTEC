@@ -1,0 +1,73 @@
+﻿using CineTec.Models;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Http;
+using System.IO;
+
+namespace CineTec.Controllers
+{
+    public class movieController : ApiController
+    {
+        static string pathmovie = HttpContext.Current.Server.MapPath("~/Data_Storage/movies.json");
+        static string jsonmovies = File.ReadAllText(pathmovie);
+        static List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(jsonmovies);
+
+
+        [HttpGet]
+        public IEnumerable<Movie> Get()
+        {
+            return movies;
+        }
+
+        
+        [HttpGet]
+        public bool Get(string oname)
+        {
+            var found = movies.Find(a => a.oname == oname);
+            if (found != null)
+            {
+                return true;
+            }
+            return false;
+        }
+       
+        [HttpPost]
+        [Route("api/movie/add")]
+        public IHttpActionResult Post([FromBody] Movie movieData)
+        {
+            if (movieData == null)
+            {
+                return BadRequest("Invalid data for a movie");
+            }
+
+            // Add the received movieData to the list
+            movies.Add(movieData);
+
+            // Serialize the updated list back to JSON and write it to the file
+            string newJson = JsonConvert.SerializeObject(movies, Formatting.Indented);
+            File.WriteAllText(pathmovie, newJson);
+
+            return Ok("Admin added successfully");
+        }
+
+        
+        [HttpDelete]
+        [Route("api/movie/delete")]
+        public IHttpActionResult Delete(string oname)
+        {
+            Movie movieToRemove = movies.Find(movie => movie.oname == oname);
+
+            if (movieToRemove != null)
+            {
+                movies.Remove(movieToRemove);
+
+                string newJson = JsonConvert.SerializeObject(movies, Formatting.Indented);
+                File.WriteAllText(pathmovie, newJson);
+                return Ok("Movie sucefully deleted");
+            }
+            return BadRequest("Wrong input or movie not foundW!");
+        }
+
+    }
+}

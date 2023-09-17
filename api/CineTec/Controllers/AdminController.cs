@@ -83,7 +83,7 @@ namespace CineTec.Controllers
         //DELETE api/Admin/pedro@cinema.com
         [HttpDelete]
         [Route("api/admin/delete")]
-        public string Delete(string id)
+        public IHttpActionResult Delete(string id)
         {
             Admin adminToRemove = admins.Find(admin => admin.id == id);
 
@@ -93,9 +93,9 @@ namespace CineTec.Controllers
 
                 string newJson = JsonConvert.SerializeObject(admins, Formatting.Indented);
                 File.WriteAllText(pathadmin, newJson);
-                return "Admin deleted";
+                return Ok("Admin was deleted");
             }
-            return "Error 404: admin not found";
+            return BadRequest("Admin not found");
         }
        
     }
