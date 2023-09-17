@@ -7,10 +7,10 @@ namespace CineTec.Models
 {
     public class Cinema
     {
-        public string TheaterName { get; set; }
-        public string Province { get; set; }
-        public string Country { get; set; }
-        public int RoomsAmount { get; set; }
-        public List<int> RoomID { get; set; }
+        public string name { get; set; }
+        public string province { get; set; }
+        public string country { get; set; }
+        public int roomsamount { get; set; }
+        public List<int> roomid { get; set; }
     }
 }

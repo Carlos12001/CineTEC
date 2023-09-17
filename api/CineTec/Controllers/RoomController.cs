@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CineTec.Controllers
 {
-    public class roomController : ApiController
+    public class RoomController : ApiController
     {
         static string pathroom = HttpContext.Current.Server.MapPath("~/Data_Storage/rooms.json");
         static string jsonrooms = File.ReadAllText(pathroom);
@@ -16,6 +16,7 @@ namespace CineTec.Controllers
 
 
         [HttpGet]
+        [Route("api/room")]
         public IEnumerable<Room> Get()
         {
             return rooms;
