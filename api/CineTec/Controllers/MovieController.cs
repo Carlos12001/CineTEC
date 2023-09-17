@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Http;
 using System.IO;
+using System.Linq;
 
 namespace CineTec.Controllers
 {
@@ -22,16 +23,20 @@ namespace CineTec.Controllers
 
         
         [HttpGet]
-        public bool Get(string oname)
+        [Route("api/movie/pick")]
+        public IHttpActionResult Get(int id)
         {
-            var found = movies.Find(a => a.oname == oname);
-            if (found != null)
+            // Find the movie with the specified id
+            Movie movie = movies.FirstOrDefault(a => a.id == id);
+
+            if (movie == null)
             {
-                return true;
+                return NotFound(); // Return a 404 Not Found response if the movie is not found
             }
-            return false;
+
+            return Ok(movie); // Return a 200 OK response with the movie data
         }
-       
+
         [HttpPost]
         [Route("api/movie/add")]
         public IHttpActionResult Post([FromBody] Movie movieData)

@@ -45,6 +45,21 @@ namespace CineTec.Controllers
             }
             return false;
         }
+
+        [HttpGet]
+        [Route("api/admin/pick")]
+        public IHttpActionResult Get(string email)
+        {
+            // Find the admin with the specified ID
+            Admin admin = admins.FirstOrDefault(a => a.email == email);
+
+            if (admin == null)
+            {
+                return NotFound(); // Return a 404 Not Found response if the admin is not found
+            }
+
+            return Ok(admin); // Return a 200 OK response with the admin data
+        }
         /*
         //POST api/Admin
         public bool Post([FromBody] Admin admin)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Http;
 using System.IO;
+using System.Linq;
 
 namespace CineTec.Controllers
 {
@@ -22,14 +23,18 @@ namespace CineTec.Controllers
 
 
         [HttpGet]
-        public bool Get(int id)
+        [Route("api/room/pick")]
+        public IHttpActionResult Get(int id)
         {
-            var found = rooms.Find(a => a.id == id);
-            if (found != null)
+            // Find the room with the specified id
+            Room room = rooms.FirstOrDefault(a => a.id == id);
+
+            if (room == null)
             {
-                return true;
+                return NotFound(); // Return a 404 Not Found response if the room is not found
             }
-            return false;
+
+            return Ok(room); // Return a 200 OK response with the room data
         }
 
         [HttpPost]
