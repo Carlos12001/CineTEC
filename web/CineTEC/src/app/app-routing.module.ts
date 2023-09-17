@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminEditorComponent } from './admin-editor/admin-editor.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -10,8 +11,9 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: AdminLoginComponent },
+      { path: 'editor', component: AdminEditorComponent },
       { path: '**', redirectTo: 'login' },
     ],
   },

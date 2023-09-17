@@ -29,13 +29,13 @@ export class AdminLoginComponent {
     if (this.loginForm.valid) {
       admin.email = this.loginForm.value.email;
       admin.password = this.loginForm.value.password;
-      console.log(admin);
 
       // Simulación de envío al servidor
       this.fakeServerRequest(admin)
         .then((response) => {
           if (response === 'true') {
             console.log('Autenticación exitosa.');
+            this.router.navigate(['/admin/editor']);
           } else {
             console.log('Credenciales incorrectas.');
           }

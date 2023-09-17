@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminEditorComponent } from './admin-editor/admin-editor.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     HeaderComponent,
     FooterComponent,
     AdminLoginComponent,
+    AdminEditorComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
