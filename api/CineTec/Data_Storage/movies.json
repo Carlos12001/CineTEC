@@ -1,0 +1,32 @@
+[
+    {
+        "id": 0,
+        "rating": "EA",
+        "director": "Isaac",
+        "duration": "25:00",
+        "image": "githubURL",
+        "cname": "Datos 1",
+        "oname": "Data Structure Analisis 1",
+        "prota":
+        [
+            "Pedro",
+            "Juancho",
+            "Diosito"
+        ]
+    },
+    {
+        "id": 1,
+        "rating": "EA",
+        "director": "Pedro Guitierrez",
+        "duration": "50:00",
+        "image": "githubURLpng",
+        "cname": "Intro al sufrimiento",
+        "oname": "Coding intro",
+        "prota":
+        [
+            "Pedro",
+            "Juancho",
+            "Morgan Freeman"
+        ]
+    }
+]
