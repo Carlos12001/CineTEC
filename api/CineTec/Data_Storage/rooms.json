@@ -3,7 +3,7 @@
         "zipcode": 0,
         "rows": 20,
         "columns": 18,
-        "theatername": "Teatro el Pedro",
+        "theatername": "cineTEC",
         "projectionid":
         [
             2,
@@ -15,7 +15,7 @@
         "zipcode": 1,
         "rows": 30,
         "columns": 10,
-        "theatername": "Teatro el Juancho",
+        "theatername": "cineTEC2",
         "projectionid":
         [
             1,

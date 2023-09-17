@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CineTec.Controllers
 {
-    public class movieController : ApiController
+    public class MovieController : ApiController
     {
         static string pathmovie = HttpContext.Current.Server.MapPath("~/Data_Storage/movies.json");
         static string jsonmovies = File.ReadAllText(pathmovie);
@@ -16,6 +16,7 @@ namespace CineTec.Controllers
 
 
         [HttpGet]
+        [Route("api/movie")]
         public IEnumerable<Movie> Get()
         {
             return movies;
@@ -53,7 +54,7 @@ namespace CineTec.Controllers
             string newJson = JsonConvert.SerializeObject(movies, Formatting.Indented);
             File.WriteAllText(pathmovie, newJson);
 
-            return Ok("Admin added successfully");
+            return Ok("Movie added successfully");
         }
 
         

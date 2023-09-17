@@ -10,7 +10,7 @@ using System.IO;
 
 namespace CineTec.Controllers
 {
-    public class adminController : ApiController
+    public class AdminController : ApiController
     {
         static string pathadmin = HttpContext.Current.Server.MapPath("~/Data_Storage/admins.json");
         static string jsonadmins = File.ReadAllText(pathadmin);
@@ -28,7 +28,8 @@ namespace CineTec.Controllers
 
         //static Dictionary<string, Admin> admins = new Dictionary<string, Admin>();
 
-        //GET api/Admin
+        [HttpGet]
+        [Route("api/admin")]
         public IEnumerable<Admin> Get()
         { 
             return admins;
