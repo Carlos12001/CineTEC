@@ -24,10 +24,10 @@ namespace CineTec.Controllers
         
         [HttpGet]
         [Route("api/movie/pick")]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(string oname)
         {
             // Find the movie with the specified id
-            Movie movie = movies.FirstOrDefault(a => a.id == id);
+            Movie movie = movies.FirstOrDefault(a => a.oname == oname);
 
             if (movie == null)
             {

@@ -35,15 +35,16 @@ namespace CineTec.Controllers
         }
 
         //GET api/Admin/pedro@cinema.com
-        [HttpGet]
-        public bool Get(string email, string password)
+        [HttpPost]
+        [Route("api/admin/login")]
+        public IHttpActionResult Post(string email, string password)
         {
             var found = admins.Find(a => a.email == email && a.password == password);
-            if (found != null)
+            if (found == null)
             {
-                return true;
+                return NotFound();
             }
-            return false;
+            return Ok("true");
         }
 
         [HttpGet]
