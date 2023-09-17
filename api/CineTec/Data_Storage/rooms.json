@@ -3,7 +3,7 @@
         "id": 0,
         "rows": 20,
         "columns": 18,
-        "name": "Teatro el Pedro",
+        "theatername": "Teatro el Pedro",
         "projectionid":
         [
             2,
@@ -15,7 +15,7 @@
         "id": 1,
         "rows": 30,
         "columns": 10,
-        "name": "Teatro el Juancho",
+        "theatername": "Teatro el Juancho",
         "projectionid":
         [
             1,
