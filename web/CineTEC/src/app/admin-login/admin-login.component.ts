@@ -46,19 +46,20 @@ export class AdminLoginComponent {
 
       // Para enviar al servidor real, descomenta lo siguiente:
       /*
-      this.http.post(`${apiUrl}/login`, adminData)
-        .subscribe(
-          (response: string) => { // Aquí especificamos que la respuesta es una cadena
-            if (response === 'true') {
-              console.log('Autenticación exitosa.');
-            } else {
-              console.log('Credenciales incorrectas.');
-            }
-          },
-          error => {
-            console.log('Error del servidor:', error);
+      this.http.post(`${apiUrl}/login`, admin).subscribe(
+        (response: string) => {
+          // Aquí especificamos que la respuesta es una cadena
+          if (response === 'true') {
+            console.log('Autenticación exitosa.');
+            this.router.navigate(['/admin/editor']);
+          } else {
+            console.log('Credenciales incorrectas.');
           }
-        );
+        },
+        (error) => {
+          console.log('Error del servidor:', error);
+        }
+      );
       */
     }
   }
