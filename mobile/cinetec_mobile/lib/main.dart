@@ -43,7 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: const Color(0xFF222222),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Center(child: Text(widget.title, style: const TextStyle(color: Color(0xFFfdfcfc)),)),
+        title: Center(
+            child: Text(
+          widget.title,
+          style: const TextStyle(color: Color(0xFFfdfcfc)),
+        )),
       ),
       bottomNavigationBar: NavigationBar(
         backgroundColor: const Color(0xFF222222),
@@ -92,6 +96,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
- 
 }
