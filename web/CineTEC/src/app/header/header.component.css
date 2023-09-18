@@ -1,0 +1,52 @@
+.header {
+  background-color: var(--primary);
+  color: var(--text);
+  padding: 1rem 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link, .button {
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;  /* Hace que el botón sea redondo */
+  transition: background-color 0.3s ease; /* Animación */
+}
+
+.nav-link:hover, .button:hover, .button:focus {
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+  font-weight: bolder;
+}
+
+/* Estilos para diferentes tipos de botones */
+.button-primary {
+  background-color: var(--primary);
+}
+
+.button-secondary {
+  background-color: var(--secondary);
+}
+
+.button-accent {
+  background-color: var(--accent);
+}
