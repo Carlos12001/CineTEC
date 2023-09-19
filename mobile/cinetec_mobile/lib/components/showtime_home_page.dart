@@ -1,4 +1,5 @@
 import 'package:cinetec_mobile/classes/movie.dart';
+import 'package:cinetec_mobile/components/movie_details_page.dart';
 import 'package:flutter/material.dart';
 
 Expanded carteleraHomePage() {
@@ -24,49 +25,64 @@ Expanded carteleraHomePage() {
             itemBuilder: (context, index) {
               Movie peliculaActual = peliculas[index];
 
-              return SizedBox(
-                height: 150,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 120,
-                          child: FittedBox(
-                              fit: BoxFit.fill,
-                              child: Image.asset(peliculaActual.imagen)),
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              "Pelicula: ${peliculaActual.cname}",
-                              style: TextStyle(color: Color(0xFFfdfcfc)),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${peliculaActual.rating}",
-                                  style: TextStyle(color: Color(0xFFfdfcfc)),
-                                ),
-                                Text(
-                                  "${peliculaActual.duration} min",
-                                  style: TextStyle(color: Color(0xFFfdfcfc)),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              "Director: ${peliculaActual.director}",
-                              style: TextStyle(color: Color(0xFFfdfcfc)),
-                            ),
-                          ],
-                        ),
-                      ],
+              return InkWell(
+                // Lógica para navegar a la nueva página
+                onTap: () {
+                  // Lógica para navegar a la nueva página
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MovieDetails(title: "Horarios",
+                          pelicula:
+                              peliculaActual), // Suponiendo que tienes una página llamada DetallePelicula
                     ),
-                  ],
+                  );
+                },
+                child: SizedBox(
+                  height: 150,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 120,
+                            child: FittedBox(
+                                fit: BoxFit.fill,
+                                child: Image.asset(peliculaActual.imagen)),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "Pelicula: ${peliculaActual.cname}",
+                                style: TextStyle(color: Color(0xFFfdfcfc)),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${peliculaActual.rating}",
+                                    style: TextStyle(color: Color(0xFFfdfcfc)),
+                                  ),
+                                  Text(
+                                    "${peliculaActual.duration} min",
+                                    style: TextStyle(color: Color(0xFFfdfcfc)),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "Director: ${peliculaActual.director}",
+                                style: TextStyle(color: Color(0xFFfdfcfc)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
