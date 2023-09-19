@@ -1,4 +1,10 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,linux,visualstudio,aspnetcore
+# M ../../api/.vs/CineTec/v17/.suo
+ M ../../api/CineTec/bin/CineTec.dll
+ M ../../api/CineTec/bin/CineTec.pdb
+ M ../../api/CineTec/obj/Debug/CineTec.csproj.AssemblyReference.cache
+ M ../../api/CineTec/obj/Debug/CineTec.dll
+ M ../../api/CineTec/obj/Debug/CineTec.pdb
+ M ../../api/CineTec/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache Created by https://www.toptal.com/developers/gitignore/api/windows,linux,visualstudio,aspnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,visualstudio,aspnetcore
 
 ### ASPNETCore ###
