@@ -35,17 +35,23 @@ namespace CineTec.Controllers
             return admins;
         }
 
-        //GET api/Admin/pedro@cinema.com
+        // GET api/Admin/pedro@cinema.com
         [HttpPost]
         [Route("api/admin/login")]
-        public IHttpActionResult Post(string email, string password)
+        public IHttpActionResult Login([FromBody] Admin adminData)
         {
-            var found = admins.Find(a => a.email == email && a.password == password);
+            if (adminData == null)
+            {
+                return BadRequest("Invalid payload");
+            }
+
+            var found = admins.Find(a => a.email == adminData.email && a.password == adminData.password);
             if (found == null)
             {
                 return NotFound();
             }
-            return Ok("true");
+
+            return Ok(found); // Retornamos el objeto Admin encontrado.
         }
 
         [HttpGet]

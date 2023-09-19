@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CineTec
 {
@@ -9,6 +10,10 @@ namespace CineTec
     {
         public static void Register(HttpConfiguration config)
         {
+            // Habilitar CORS
+            var cors = new EnableCorsAttribute("*", "*", "*");  // Nota: No uses esto en producción, especifica los dominios permitidos.
+            config.EnableCors(cors);
+
             // Configuración y servicios de Web API
 
             // Rutas de Web API
