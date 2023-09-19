@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Admin, admin } from '../models/admin.model';
 import { Router } from '@angular/router';
 import { AdminLoginService } from '../services/admin-login.service';
-import { Observable } from 'rxjs/internal/Observable';
-import { AdminLoginResponse } from '../models/admin-login-response.model';
 
 @Component({
   selector: 'app-admin-login',
@@ -33,7 +31,6 @@ export class AdminLoginComponent {
       this.adminLoginService.login(admin.email, admin.password).subscribe({
         next: (response: Admin) => {
           if (response) {
-            admin.id = response.id;
             admin.name = response.name;
             admin.email = response.email;
             admin.password = response.password;
@@ -56,20 +53,5 @@ export class AdminLoginComponent {
         },
       });
     }
-  }
-
-  fakeServerRequest(adminData: Admin): Promise<string> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (
-          adminData.email === 'pedro@gmail.com' &&
-          adminData.password === '1234'
-        ) {
-          resolve('true');
-        } else {
-          resolve('false');
-        }
-      }, 2000);
-    });
   }
 }

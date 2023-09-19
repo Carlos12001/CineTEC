@@ -50,8 +50,8 @@ namespace CineTec.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(found); // Retornamos el objeto Admin encontrado.
+            
+            return Ok(new {name=found.name }); // Retornamos el objeto Admin encontrado.
         }
 
         [HttpGet]
