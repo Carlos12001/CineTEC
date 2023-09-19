@@ -1,14 +1,28 @@
 <h1>Welcome {{ dataAdmin?.name }} to Editor!</h1>
 <p>admin-editor works!</p>
 
-<!-- <div class="grid-container">
-  <div style="grid-area: banner">
-    <app-banner></app-banner>
+<div class="container">
+  <!-- Botones en la parte superior -->
+  <div class="btn-group" role="group">
+    <button
+      *ngFor="let entity of entities"
+      type="button"
+      class="btn animated-btn"
+      (click)="setSelectedEntity(entity.value)"
+    >
+      {{ entity.label }}
+    </button>
   </div>
-  <div style="grid-area: sidebar">
-    <app-sidebar></app-sidebar>
+
+  <!-- Sidebar y editor en la parte inferior -->
+  <div class="content-area">
+    <div class="sidebar">
+      <ul *ngIf="selectedEntity === 'movies'">
+        <li *ngFor="let movie of movies">{{ movie.oname }}</li>
+      </ul>
+    </div>
+    <div class="editor">
+      <!-- Contenido del editor -->
+    </div>
   </div>
-  <div style="grid-area: editor">
-    <app-editor></app-editor>
-  </div>
-</div> -->
+</div>
