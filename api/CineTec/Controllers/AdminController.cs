@@ -35,7 +35,7 @@ namespace CineTec.Controllers
             return admins;
         }
 
-        // GET api/Admin/pedro@cinema.com
+        // Post api/Admin/pedro@cinema.com
         [HttpPost]
         [Route("api/admin/login")]
         public IHttpActionResult Login([FromBody] Admin adminData)

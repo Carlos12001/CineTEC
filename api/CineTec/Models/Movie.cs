@@ -7,8 +7,6 @@ namespace CineTec.Models
 {
     public class Movie
     {
-
-        public int id { get; set; }
         public string rating { get; set; }
         public string director { get; set; }
         public string duration { get; set; }

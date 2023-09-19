@@ -26,5 +26,19 @@
             "Juancho",
             "Morgan Freeman"
         ]
+    },
+    {
+        "rating": "+18",
+        "director": "Masayuki Kojima",
+        "duration": "1:59Ñ",
+        "image": "githubURLpng",
+        "cname": "Tabidachi no Yoake",
+        "oname": "Made in Abyss",
+        "prota":
+        [
+            "Miyu Tomita",
+            "Mariya Ise",
+            "Seyaka Ohara"
+        ]
     }
 ]

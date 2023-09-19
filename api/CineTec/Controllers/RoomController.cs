@@ -24,11 +24,11 @@ namespace CineTec.Controllers
 
 
         [HttpGet]
-        [Route("api/room/pick")]
-        public IHttpActionResult Get(int id)
+        [Route("api/room/find")]
+        public IHttpActionResult Get([FromBody] Room roomData)
         {
             // Find the room with the specified id
-            Room room = rooms.FirstOrDefault(a => a.id == id);
+            Room room = rooms.FirstOrDefault(a => a.id == roomData.id);
 
             if (room == null)
             {
@@ -60,9 +60,9 @@ namespace CineTec.Controllers
 
         [HttpDelete]
         [Route("api/room/delete")]
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete([FromBody] Room roomData)
         {
-            Room roomToRemove = rooms.Find(room => room.id == id);
+            Room roomToRemove = rooms.Find(room => room.id == roomData.id);
 
             if (roomToRemove != null)
             {
@@ -70,7 +70,7 @@ namespace CineTec.Controllers
 
                 string newJson = JsonConvert.SerializeObject(rooms, Formatting.Indented);
                 File.WriteAllText(pathroom, newJson);
-                return Ok("Movie sucefully deleted");
+                return Ok(rooms);
             }
             return BadRequest("Wrong input or movie not foundW!");
         }

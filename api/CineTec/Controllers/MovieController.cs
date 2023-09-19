@@ -24,11 +24,11 @@ namespace CineTec.Controllers
 
         
         [HttpGet]
-        [Route("api/movie/pick")]
-        public IHttpActionResult Get(string oname)
+        [Route("api/movie/find")]
+        public IHttpActionResult Get([FromBody] Movie movieData)
         {
             // Find the movie with the specified id
-            Movie movie = movies.FirstOrDefault(a => a.oname == oname);
+            Movie movie = movies.FirstOrDefault(a => a.oname == movieData.oname);
 
             if (movie == null)
             {
@@ -54,15 +54,15 @@ namespace CineTec.Controllers
             string newJson = JsonConvert.SerializeObject(movies, Formatting.Indented);
             File.WriteAllText(pathmovie, newJson);
 
-            return Ok("Movie added successfully");
+            return Ok(movies);
         }
 
         
         [HttpDelete]
         [Route("api/movie/delete")]
-        public IHttpActionResult Delete(string oname)
+        public IHttpActionResult Delete([FromBody] Movie movieData)
         {
-            Movie movieToRemove = movies.Find(movie => movie.oname == oname);
+            Movie movieToRemove = movies.Find(movie => movie.oname == movieData.oname);
 
             if (movieToRemove != null)
             {
@@ -70,9 +70,9 @@ namespace CineTec.Controllers
 
                 string newJson = JsonConvert.SerializeObject(movies, Formatting.Indented);
                 File.WriteAllText(pathmovie, newJson);
-                return Ok("Movie sucefully deleted");
+                return Ok(movies);
             }
-            return BadRequest("Wrong input or movie not foundW!");
+            return BadRequest("Wrong input or movie not found!");
         }
 
     }
