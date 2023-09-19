@@ -36,6 +36,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     int currentPageIndex = 0;
@@ -49,32 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           style: const TextStyle(color: Color(0xFFfdfcfc)),
         )),
       ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: const Color(0xFF222222),
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        indicatorColor: Theme.of(context).colorScheme.primary,
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.local_activity),
-            label: "Cines",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.school),
-            icon: Icon(Icons.star_border_outlined),
-            label: "Estrenos",
-          ),
-        ],
-      ),
+      bottomNavigationBar: homeNavigationBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -94,6 +77,34 @@ class _MyHomePageState extends State<MyHomePage> {
           carteleraHomePage(),
         ],
       ),
+    );
+  }
+
+  BottomNavigationBar homeNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: Color(0xFF222222),
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Inicio',
+          activeIcon: Icon(Icons.home, color: Color(0xFF01528f)),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.location_city),
+          label: "Cine",
+          activeIcon: Icon(Icons.location_city, color: Color(0xFF01528f)),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.star_border_outlined),
+          label: "Estrenos",
+          activeIcon: Icon(Icons.star_border_outlined, color: Color(0xFF01528f)),
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.white, // Color de la letra cuando está activo
+      unselectedItemColor:
+          Colors.grey, // Color de la letra cuando no está activo
+      onTap: _onItemTapped,
     );
   }
 }
