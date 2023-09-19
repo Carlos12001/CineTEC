@@ -11,6 +11,8 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminEditorComponent } from './admin-editor/admin-editor.component';
 
+import { AdminLoginService } from './services/admin-login.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { AdminEditorComponent } from './admin-editor/admin-editor.component';
     AdminLoginComponent,
     AdminEditorComponent,
   ],
-  providers: [],
+  providers: [AdminLoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
