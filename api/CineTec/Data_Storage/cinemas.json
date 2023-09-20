@@ -1,0 +1,23 @@
+[
+    {
+        "name": "cineTEC",
+        "province": "Cartago",
+        "country": "Costa Rica",
+        "roomsamount": 2,
+        "roomid":
+        [
+            0,
+            3
+        ]
+    },
+    {
+        "name": "cineTEC2",
+        "province": "Puntarenas",
+        "country": "Costa Rica",
+        "roomsamount": 1,
+        "roomid":
+        [
+            1
+        ]
+    }
+]
