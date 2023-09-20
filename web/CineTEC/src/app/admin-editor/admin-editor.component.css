@@ -1,26 +1,29 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* 100% del viewport height */
+  height: 100vh;
 }
 
 .btn-group {
-  width: 100%; /* Cubrirá todo el ancho del contenedor padre */
+  width: 100%;
   display: flex;
-  justify-content: space-around; /* Distribuir botones uniformemente a través del ancho */
-  background-color: var(--column2-bg); /* Color de fondo del banner */
-  flex: 0; /* No queremos que este contenedor crezca */
+  justify-content: space-around;
+  flex: 0;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
 }
 
 .sidebar {
-  width: 20%;
+  flex: 0 0 20%; /* No crecer, no encoger, ancho base del 20% */
   background-color: var(--column1-bg);
   color: var(--text);
-  /* más estilos */
 }
+
 .editor {
-  flex: 1;
-  /* más estilos */
+  flex: 1; /* Tomar todo el espacio disponible */
 }
 
 .animated-btn {
@@ -41,4 +44,42 @@
   box-shadow: 0px 6px 10px rgba(150, 150, 150, 0.7);
   transform: scale(1.05);
   font-weight: bolder;
+}
+
+.movie-btn {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 8px;
+  margin: 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+
+.movie-btn img {
+  width: 50px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.movie-info {
+  margin-left: 8px;
+}
+
+.movie-info h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.movie-info p {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+}
+
+.movie-btn:hover,
+.movie-btn:focus {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
 }

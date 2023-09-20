@@ -1,6 +1,3 @@
-<h1>Welcome {{ dataAdmin?.name }} to Editor!</h1>
-<p>admin-editor works!</p>
-
 <div class="container">
   <!-- Botones en la parte superior -->
   <div class="btn-group" role="group">
@@ -14,15 +11,26 @@
     </button>
   </div>
 
-  <!-- Sidebar y editor en la parte inferior -->
+  <!-- Área de contenido inferior -->
   <div class="content-area">
+    <!-- Sidebar -->
     <div class="sidebar">
       <ul *ngIf="selectedEntity === 'movies'">
-        <li *ngFor="let movie of movies">{{ movie.oname }}</li>
+        <li *ngFor="let movie of movies">
+          <button class="movie-btn" (click)="selectMovie(movie)">
+            <img [src]="movie.image" alt="{{ movie.oname }}" />
+            <div class="movie-info">
+              <h2>{{ movie.oname }}</h2>
+              <p>{{ movie.cname }}</p>
+            </div>
+          </button>
+        </li>
       </ul>
     </div>
+
+    <!-- Editor -->
     <div class="editor">
-      <div *ngIf="selectedEntity === 'movies'">
+      <div *ngIf="selectedEntity === 'movies' && selectedMovie != null">
         Movie details
         <h2>Editando: {{ selectedMovie?.oname }}</h2>
       </div>
