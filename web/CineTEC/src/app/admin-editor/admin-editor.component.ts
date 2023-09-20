@@ -68,7 +68,6 @@ export class AdminEditorComponent implements OnInit {
   }
 
   clearData() {
-    this.selectedEntity = '';
     this.movies = [];
     this.selectedMovie = null;
     this.originalMovie = null;
@@ -233,10 +232,25 @@ export class AdminEditorComponent implements OnInit {
 
   deleteMovie() {
     if (this.selectedMovie) {
-      console.log('Borrando película: ', this.selectedMovie);
+      this.adminEditorService.deleteMovie(this.selectedMovie).subscribe({
+        next: () => {
+          console.log('Película borrada exitosamente:', this.selectedMovie);
+          this.clearData();
+          this.loadMovies();
+        },
+        error: (err: any) => {
+          console.error('Error al borrar la película:', err);
+          if (err.status === 404) {
+            console.log('La película no se encontró.');
+          } else {
+            console.log('Ocurrió un error desconocido.', err);
+          }
+        },
+        complete: () => {
+          console.log('La operación de borrado se ha completado.');
+        },
+      });
     }
-    this.clearData();
-    this.loadMovies();
   }
 
   addNewMovie() {

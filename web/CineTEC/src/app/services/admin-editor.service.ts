@@ -21,4 +21,20 @@ export class AdminEditorService {
   public getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.url + 'api/movie');
   }
+
+  public deleteMovie(movie: Movie): Observable<Movie[]> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'my-auth-token',
+      }),
+      body: movie,
+    };
+
+    return this.http.request<Movie[]>(
+      'DELETE',
+      `${this.url}api/movie/delete`,
+      options
+    );
+  }
 }
