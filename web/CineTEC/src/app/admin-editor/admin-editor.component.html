@@ -1,3 +1,5 @@
+<h1>Welcome {{ dataAdmin?.name }} to Editor!</h1>
+
 <div class="container">
   <!-- Botones en la parte superior -->
   <div class="btn-group" role="group">
@@ -38,10 +40,9 @@
     </div>
 
     <!-- Editor -->
-    <!-- Editor -->
     <div class="editor">
       <div *ngIf="selectedEntity === 'movies' && selectedMovie != null">
-        <h2>Editando: {{ selectedMovie?.oname }}</h2>
+        <h2>Editando: {{ selectedMovie.oname }}</h2>
         <form>
           <div class="form-group">
             <label for="cname">Nombre Comercial:</label>
@@ -65,7 +66,13 @@
           </div>
           <div class="form-group">
             <label>Protagonistas:</label>
-            <div *ngFor="let prota of selectedMovie?.prota; let i = index">
+            <div
+              *ngFor="
+                let prota of selectedMovie?.prota;
+                let i = index;
+                trackBy: trackByFunction
+              "
+            >
               <input
                 [ngModel]="getSafeProta(i)"
                 (ngModelChange)="setSafeProta(i, $event)"
