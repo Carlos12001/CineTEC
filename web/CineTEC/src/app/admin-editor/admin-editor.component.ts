@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdminEditorService } from '../services/admin-editor.service';
 
 import { Admin, admin } from '../models/admin.model';
-import { Movie, moviesExample } from '../models/movies.model';
+import { Movie } from '../models/movies.model';
 
 @Component({
   selector: 'app-admin-editor',
@@ -22,7 +23,7 @@ export class AdminEditorComponent implements OnInit {
     { label: 'Salas', value: 'room' },
   ];
 
-  movies: Movie[] = moviesExample;
+  movies: Movie[] = [];
 
   selectedMovie: Movie | null = null;
 
@@ -30,7 +31,10 @@ export class AdminEditorComponent implements OnInit {
 
   editingMovie: Movie | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private adminEditorService: AdminEditorService
+  ) {}
 
   /**
    * Initializes the component and assigns the 'admin' data to 'dataAdmin'
@@ -65,7 +69,7 @@ export class AdminEditorComponent implements OnInit {
 
   clearData() {
     this.selectedEntity = '';
-    // this.movies = [];
+    this.movies = [];
     this.selectedMovie = null;
     this.originalMovie = null;
   }
@@ -78,6 +82,30 @@ export class AdminEditorComponent implements OnInit {
   setSelectedEntity(entity: string) {
     this.clearData();
     this.selectedEntity = entity;
+    if (entity === 'movies') {
+      this.loadMovies();
+    }
+  }
+
+  loadMovies() {
+    this.adminEditorService.getMovies().subscribe({
+      next: (data: Movie[]) => {
+        this.movies = data; // Actualiza la variable de clase movies con los datos recibidos
+        console.log('Películas cargadas exitosamente.');
+      },
+      error: (err: any) => {
+        console.error('Error al cargar las películas:', err);
+        if (err.status === 404) {
+          console.log('No se encontraron películas.');
+        } else {
+          console.log('Ocurrió un error desconocido.', err);
+        }
+      },
+      complete: () => {
+        // Código a ejecutar cuando el observable se completa, si es necesario.
+        console.log('La carga de películas se ha completado.');
+      },
+    });
   }
 
   /**
@@ -128,7 +156,8 @@ export class AdminEditorComponent implements OnInit {
       }
       console.log('Actualizando película: ', this.selectedMovie);
     }
-    this.selectedMovie = null;
+    this.clearData();
+    this.loadMovies();
   }
 
   /**
@@ -206,7 +235,8 @@ export class AdminEditorComponent implements OnInit {
     if (this.selectedMovie) {
       console.log('Borrando película: ', this.selectedMovie);
     }
-    this.selectedMovie = null;
+    this.clearData();
+    this.loadMovies();
   }
 
   addNewMovie() {

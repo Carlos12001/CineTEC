@@ -12,6 +12,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminEditorComponent } from './admin-editor/admin-editor.component';
 
 import { AdminLoginService } from './services/admin-login.service';
+import { AdminEditorService } from './services/admin-editor.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { AdminLoginService } from './services/admin-login.service';
     AdminLoginComponent,
     AdminEditorComponent,
   ],
-  providers: [AdminLoginService],
+  providers: [AdminLoginService, AdminEditorService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
