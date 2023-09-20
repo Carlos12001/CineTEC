@@ -37,4 +37,12 @@ export class AdminEditorService {
       options
     );
   }
+
+  public addMovie(movie: Movie): Observable<Movie[]> {
+    return this.http.post<Movie[]>(
+      this.url + 'api/movie/add',
+      movie,
+      this.httpOptions
+    );
+  }
 }

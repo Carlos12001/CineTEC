@@ -153,10 +153,25 @@ export class AdminEditorComponent implements OnInit {
         console.log('Ningún cambio detectado, envío cancelado.');
         return;
       }
-      console.log('Actualizando película: ', this.selectedMovie);
+
+      if (this.selectedMovie != null) {
+        this.deleteMovie();
+      }
+
+      this.adminEditorService.addMovie(this.selectedMovie).subscribe({
+        next: (data: Movie[]) => {
+          console.log('Película agregada o actualizada exitosamente.');
+          this.movies = data;
+        },
+        error: (err: any) => {
+          console.error('Error al agregar o actualizar la película:', err);
+          // Aquí puedes agregar más manejo de errores
+        },
+        complete: () => {
+          console.log('La operación de agregar o actualizar se ha completado.');
+        },
+      });
     }
-    this.clearData();
-    this.loadMovies();
   }
 
   /**
@@ -233,10 +248,10 @@ export class AdminEditorComponent implements OnInit {
   deleteMovie() {
     if (this.selectedMovie) {
       this.adminEditorService.deleteMovie(this.selectedMovie).subscribe({
-        next: () => {
+        next: (data: Movie[]) => {
           console.log('Película borrada exitosamente:', this.selectedMovie);
           this.clearData();
-          this.loadMovies();
+          this.movies = data;
         },
         error: (err: any) => {
           console.error('Error al borrar la película:', err);
@@ -254,6 +269,8 @@ export class AdminEditorComponent implements OnInit {
   }
 
   addNewMovie() {
+    this.originalMovie = null;
+    this.loadMovies();
     this.selectedMovie = {
       oname: '--New Movie--',
       cname: '',

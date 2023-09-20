@@ -1,11 +1,11 @@
 [
   {
-    "oname": "The Dark Knight",
-    "cname": "El Caballero de la Noche",
     "rating": "EA",
     "director": "Christopher Nolan",
     "duration": "02:40:00",
     "image": "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg",
+    "cname": "El Caballero de la Noche",
+    "oname": "The Dark Knight",
     "prota": [
       "Christian Bale",
       "Heath Ledger",
@@ -17,12 +17,12 @@
     ]
   },
   {
-    "oname": "Star Wars: The Empire Strikes Back",
-    "cname": "Star Wars: El Imperio Contraataca",
     "rating": "EA",
     "director": "Irvin Kershner",
     "duration": "01:04:00",
     "image": "https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg",
+    "cname": "Star Wars: El Imperio Contraataca",
+    "oname": "Star Wars: The Empire Strikes Back",
     "prota": [
       "Mark Hamill",
       "Harrison Ford",
@@ -40,16 +40,11 @@
     "image": "githubURL",
     "cname": "Datos 1",
     "oname": "Data Structure",
-    "prota": ["Pedro", "Juancho", "Diosito"]
-  },
-  {
-    "rating": "EA",
-    "director": "Pedro Guitierrez",
-    "duration": "50:00",
-    "image": "githubURLpng",
-    "cname": "Intro al sufrimiento",
-    "oname": "Coding Intro",
-    "prota": ["Pedro", "Juancho", "Morgan Freeman"]
+    "prota": [
+      "Pedro",
+      "Juancho",
+      "Diosito"
+    ]
   },
   {
     "rating": "+18",
@@ -58,6 +53,23 @@
     "image": "githubURLpng",
     "cname": "Tabidachi no Yoake",
     "oname": "Made in Abyss",
-    "prota": ["Miyu Tomita", "Mariya Ise", "Seyaka Ohara"]
+    "prota": [
+      "Miyu Tomita",
+      "Mariya Ise",
+      "Seyaka Ohara"
+    ]
+  },
+  {
+    "rating": "EA",
+    "director": "Pedro Guitierrez",
+    "duration": "00:50:00",
+    "image": "githubURLpng",
+    "cname": "Intro al sufrimiento",
+    "oname": "Coding Intro",
+    "prota": [
+      "Pedro",
+      "Juancho",
+      "Morgan Freeman"
+    ]
   }
 ]
