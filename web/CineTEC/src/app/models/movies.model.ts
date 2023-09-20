@@ -32,7 +32,7 @@ export const moviesExample: Movie[] = [
     cname: 'Star Wars: El Imperio Contraataca',
     rating: 'EA',
     director: 'Irvin Kershner',
-    duration: '1:04:00',
+    duration: '01:04:00',
     image:
       'https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg',
     prota: [
