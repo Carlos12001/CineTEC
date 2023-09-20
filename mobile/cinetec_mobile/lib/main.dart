@@ -1,5 +1,6 @@
+import 'package:cinetec_mobile/classes/bd_manager.dart';
+import 'package:cinetec_mobile/classes/cinema.dart';
 import 'package:cinetec_mobile/components/ads_home_page.dart';
-import 'package:cinetec_mobile/components/location_page.dart';
 import 'package:cinetec_mobile/components/showtime_home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -7,13 +8,15 @@ void main() {
   runApp(const MyApp());
 }
 
+// Clase main, se encarga de mostrar el home page
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // Widget principal 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "cineTEC mobile",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -37,11 +40,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-  String? selectedCountry;
-  String? selectedCity;
-  String? selectedCinema;
 
+  // Se encarga del manejo de paginas 
+  int _selectedIndex = 0;
+  // Muestra el pais seleccionado en el dropdown
+  String? selectedCountry;
+  // Muestra la ciudad seleccionada en el dropdown
+  String? selectedCity;
+  // Muestra el nombre del cine seleccionado en el dropdown
+  String? selectedCinema;
+  // Lista de los cines disponibles
+  List<Cinema>? cinemas;
+  String? error;
+
+ /*
+  @override
+  void initState() {
+    super.initState();
+    _fetchCinemas();
+  }
+
+  _fetchCinemas() async {
+    try {
+      List<Cinema> fetchedCinemas = await fetchCinemas();
+      setState(() {
+        print("fetched cinemas");
+        cinemas = fetchedCinemas;
+      });
+    } catch (e) {
+      setState(() {
+        error = "Failed to fetch cinemas. ${e.toString()}";
+        print(error);
+      });
+    }
+  }
+*/
+
+  // Metodo encargado de de cambiar el contenido de la pagina segun el bottomnavigator
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -50,7 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    int currentPageIndex = 0;
     return Scaffold(
       backgroundColor: const Color(0xFF222222),
       appBar: AppBar(
@@ -64,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: homeNavigationBar(),
       body: <Widget>[
         homePage(),
-        locationPage(),
+        locationPage(cinemas),
         Container(
           color: Colors.blue,
           alignment: Alignment.center,
@@ -74,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+// Widget encargado de mostrar la publicidad y las peliculas disponibles en cartelera
   Column homePage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,9 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+// Widget encargado del menu de navegacion inferior
   BottomNavigationBar homeNavigationBar() {
     return BottomNavigationBar(
-      backgroundColor: Color(0xFF222222),
+      backgroundColor: const Color(0xFF222222),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -125,8 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Column locationPage() {
-
+// Widget de la pagina cine, como objetivo seleccionar 
+  Column locationPage(List<Cinema>? cinemasList) {
     // Listas de opciones para los dropdowns obtener del json
     List<String> countries = ['USA', 'Canada', 'Mexico'];
     List<String> cities = ['City 1', 'City 2', 'City 3'];
@@ -158,8 +194,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Expanded(
           flex: 4,
           child: Container(
-            color: Color(0xFF404040),
-            padding: EdgeInsets.all(50.0),
+            color: const Color(0xFF404040),
+            padding: const EdgeInsets.all(50.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -168,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 DropdownButton<String>(
-                  dropdownColor: Color(0xFF404040),
+                  dropdownColor: const Color(0xFF404040),
                   value: selectedCountry,
                   hint: const Text(
                     'Selecciona un pais',
@@ -179,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: value,
                       child: Text(
                         value,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     );
                   }).toList(),
@@ -194,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 DropdownButton<String>(
-                  dropdownColor: Color(0xFF404040),
+                  dropdownColor: const Color(0xFF404040),
                   value: selectedCity,
                   hint: const Text(
                     'Selecciona una ciudad',
@@ -205,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: value,
                       child: Text(
                         value,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     );
                   }).toList(),
@@ -220,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 DropdownButton<String>(
-                  dropdownColor: Color(0xFF404040),
+                  dropdownColor: const Color(0xFF404040),
                   value: selectedCinema,
                   hint: const Text(
                     'Selecciona un cine',
@@ -231,7 +267,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       value: value,
                       child: Text(
                         value,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     );
                   }).toList(),
@@ -243,7 +279,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    print("Seleccion");
+                    //print("Seleccion");
+                    if (cinemasList != null) {
+                      print(cinemasList.length);
+                    } else {
+                      print("vacio");
+                    }
                   },
                   child: const Text("Guarda mi ubicación"),
                 ),

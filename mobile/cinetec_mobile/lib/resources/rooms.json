@@ -1,0 +1,26 @@
+[
+    {
+        "zipcode": 0,
+        "rows": 20,
+        "columns": 18,
+        "theatername": "cineTEC",
+        "projectionid":
+        [
+            2,
+            3,
+            6
+        ]
+    },
+    {
+        "zipcode": 1,
+        "rows": 30,
+        "columns": 10,
+        "theatername": "cineTEC2",
+        "projectionid":
+        [
+            1,
+            3,
+            4
+        ]
+    }
+]

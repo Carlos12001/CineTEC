@@ -57,7 +57,7 @@ Expanded carteleraHomePage() {
                             children: [
                               Text(
                                 "Pelicula: ${peliculaActual.cname}",
-                                style: TextStyle(color: Color(0xFFfdfcfc)),
+                                style: const TextStyle(color: Color(0xFFfdfcfc)),
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -65,17 +65,17 @@ Expanded carteleraHomePage() {
                                 children: [
                                   Text(
                                     "${peliculaActual.rating}",
-                                    style: TextStyle(color: Color(0xFFfdfcfc)),
+                                    style: const TextStyle(color: Color(0xFFfdfcfc)),
                                   ),
                                   Text(
                                     "${peliculaActual.duration} min",
-                                    style: TextStyle(color: Color(0xFFfdfcfc)),
+                                    style: const TextStyle(color: Color(0xFFfdfcfc)),
                                   ),
                                 ],
                               ),
                               Text(
                                 "Director: ${peliculaActual.director}",
-                                style: TextStyle(color: Color(0xFFfdfcfc)),
+                                style: const TextStyle(color: Color(0xFFfdfcfc)),
                               ),
                             ],
                           ),
