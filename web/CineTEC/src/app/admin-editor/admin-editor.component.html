@@ -22,7 +22,10 @@
       </ul>
     </div>
     <div class="editor">
-      <!-- Contenido del editor -->
+      <div *ngIf="selectedEntity === 'movies'">
+        Movie details
+        <h2>Editando: {{ selectedMovie?.oname }}</h2>
+      </div>
     </div>
   </div>
 </div>

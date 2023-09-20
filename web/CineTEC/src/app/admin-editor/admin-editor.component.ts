@@ -9,7 +9,11 @@ import { Movie, moviesExample } from '../models/movies.model';
 })
 export class AdminEditorComponent implements OnInit {
   dataAdmin: Admin | undefined;
+  selectedMovie: Movie | null = null;
   selectedEntity: string = '';
+  selectMovie(movie: Movie) {
+    this.selectedMovie = movie;
+  }
 
   // Lista de entidades
   entities = [
