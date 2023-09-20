@@ -111,6 +111,7 @@
             Subir Película
           </button>
           <button
+            *ngIf="selectedMovie.oname !== '--New Movie--'"
             type="button"
             class="action-btn delete-btn"
             (click)="deleteMovie()"
