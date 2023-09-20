@@ -68,12 +68,12 @@
 }
 
 .movie-info h2 {
-  font-size: 18px;
+  font-size: 1.2em;
   margin: 0;
 }
 
 .movie-info p {
-  font-size: 14px;
+  font-size: 0.8em;
   color: #777;
   margin: 0;
 }
@@ -86,11 +86,12 @@
 .no-entity-message {
   color: red;
   font-size: 1.2em;
+  align-items: center;
   font-weight: bold;
   text-align: center;
   border: 2px dashed red;
-  padding: 1em;
-  margin: 1em;
+  padding: 1.5rem 3rem;
+  margin: 1rem;
   border-radius: 10px;
   background-color: rgba(255, 0, 0, 0.1);
 }
