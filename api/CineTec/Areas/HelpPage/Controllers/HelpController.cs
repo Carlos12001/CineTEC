@@ -1,8 +1,8 @@
+using CineTec.Areas.HelpPage.ModelDescriptions;
+using CineTec.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using CineTec.Areas.HelpPage.ModelDescriptions;
-using CineTec.Areas.HelpPage.Models;
 
 namespace CineTec.Areas.HelpPage.Controllers
 {

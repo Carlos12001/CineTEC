@@ -1,12 +1,11 @@
 ﻿using CineTec.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+//using System.Web.Mvc;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-//using System.Web.Mvc;
-using System.IO;
 
 namespace CineTec.Controllers
 {
@@ -31,7 +30,7 @@ namespace CineTec.Controllers
         [HttpGet]
         [Route("api/admin")]
         public IEnumerable<Admin> Get()
-        { 
+        {
             return admins;
         }
 
@@ -50,8 +49,8 @@ namespace CineTec.Controllers
             {
                 return NotFound();
             }
-            
-            return Ok(new {name=found.name }); // Retornamos el objeto Admin encontrado.
+
+            return Ok(new { name = found.name }); // Retornamos el objeto Admin encontrado.
         }
 
         [HttpGet]
@@ -120,6 +119,6 @@ namespace CineTec.Controllers
             }
             return BadRequest("Admin not found");
         }
-       
+
     }
 }
