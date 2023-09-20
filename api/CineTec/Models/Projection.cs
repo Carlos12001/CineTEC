@@ -10,6 +10,6 @@ namespace CineTec.Models
         public int id { get; set; }
         public DateTime horary { get; set; }
         public int roomid { get; set; }
-        public int movieid { get; set; }
+        public string movieid { get; set; }
     }
 }

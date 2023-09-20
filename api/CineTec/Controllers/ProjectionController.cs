@@ -72,7 +72,7 @@ namespace CineTec.Controllers
                 File.WriteAllText(pathprojection, newJson);
                 return Ok(projections);
             }
-            return BadRequest("Wrong input or projection not foundW!");
+            return BadRequest("Wrong input or projection not found!");
         }
     }
 }
