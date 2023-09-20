@@ -5,10 +5,10 @@ export interface Movie {
   director: string;
   duration: string;
   image: string;
-  protag: [string];
+  prota: string[];
 }
 
-export const movies: Movie[] = [
+export const moviesExample: Movie[] = [
   {
     oname: 'The Dark Knight',
     cname: 'El cabellero de la Noche',
@@ -17,7 +17,7 @@ export const movies: Movie[] = [
     duration: '02:40:00',
     image:
       'https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg',
-    protag: [
+    prota: [
       'Christian Bale',
       'Heath Ledger',
       'Gary Oldman',
@@ -35,7 +35,7 @@ export const movies: Movie[] = [
     duration: '1:04:00',
     image:
       'https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg',
-    protag: [
+    prota: [
       'Mark Hamill',
       'Harrison Ford',
       'Carrie Fisher',

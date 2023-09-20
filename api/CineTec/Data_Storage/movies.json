@@ -3,7 +3,7 @@
         "rating": "EA",
         "director": "Isaac",
         "duration": "25:00",
-        "image": "githubURL",
+        "image": "https://pics.filmaffinity.com/Isaac-467843808-large.jpg",
         "cname": "Datos 1",
         "oname": "Data Structure",
         "prota":
@@ -17,7 +17,7 @@
         "rating": "EA",
         "director": "Pedro Guitierrez",
         "duration": "50:00",
-        "image": "githubURLpng",
+        "image": "https://upload.wikimedia.org/wikipedia/en/5/5a/PedroMovie.png",
         "cname": "Intro al sufrimiento",
         "oname": "Coding Intro",
         "prota":
