@@ -15,6 +15,10 @@ namespace CineTec.Controllers
         static List<Room> rooms = JsonConvert.DeserializeObject<List<Room>>(jsonrooms);
 
 
+        /*
+        * Get
+        * Retrieves a list with every room object from the stored data.
+        */
         [HttpGet]
         [Route("api/room")]
         public IEnumerable<Room> Get()
@@ -22,7 +26,12 @@ namespace CineTec.Controllers
             return rooms;
         }
 
-
+        /*
+        * Retrieves information about a Room by its ID.
+        *
+        * @param roomData The Room object containing the ID of the Room to retrieve.
+        * @return An IHttpActionResult representing the result of the retrieval.
+        */
         [HttpGet]
         [Route("api/room/find")]
         public IHttpActionResult Get([FromBody] Room roomData)
@@ -38,6 +47,12 @@ namespace CineTec.Controllers
             return Ok(room); // Return a 200 OK response with the room data
         }
 
+        /*
+        * Adds a new Room to the system.
+        *
+        * @param roomData The Room object to be added.
+        * @return An IHttpActionResult representing the result of the addition.
+        */
         [HttpPost]
         [Route("api/room/add")]
         public IHttpActionResult Post([FromBody] Room roomData)
@@ -57,7 +72,12 @@ namespace CineTec.Controllers
             return Ok("Room added successfully");
         }
 
-
+        /**
+        * Deletes a Room from the system by its ID.
+        *
+        * @param roomData The Room object containing the ID of the Room to delete.
+        * @return An IHttpActionResult representing the result of the deletion.
+        */
         [HttpDelete]
         [Route("api/room/delete")]
         public IHttpActionResult Delete([FromBody] Room roomData)

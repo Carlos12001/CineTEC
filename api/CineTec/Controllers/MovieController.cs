@@ -15,6 +15,10 @@ namespace CineTec.Controllers
         static List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(jsonmovies);
 
 
+        /*
+        * Get
+        * Retrieves a list with every movie object from the stored data.
+        */
         [HttpGet]
         [Route("api/movie")]
         public IEnumerable<Movie> Get()
@@ -22,7 +26,12 @@ namespace CineTec.Controllers
             return movies;
         }
 
-        
+        /*
+        * Retrieves information about a Movie by its original name.
+        *
+        * @param movieData The Movie object containing the original name of the Movie to retrieve.
+        * @return An IHttpActionResult representing the result of the retrieval.
+        */
         [HttpGet]
         [Route("api/movie/find")]
         public IHttpActionResult Get([FromBody] Movie movieData)
@@ -38,6 +47,12 @@ namespace CineTec.Controllers
             return Ok(movie); // Return a 200 OK response with the movie data
         }
 
+        /*
+        * Adds a new Movie to the system.
+        *
+        * @param movieData The Movie object to be added.
+        * @return An IHttpActionResult representing the result of the addition.
+        */
         [HttpPost]
         [Route("api/movie/add")]
         public IHttpActionResult Post([FromBody] Movie movieData)
@@ -57,7 +72,12 @@ namespace CineTec.Controllers
             return Ok(movies);
         }
 
-        
+        /*
+        * Deletes a Movie from the system by its original name.
+        *
+        * @param movieData The Movie object containing the original name of the Movie to delete.
+        * @return An IHttpActionResult representing the result of the deletion.
+        */
         [HttpDelete]
         [Route("api/movie/delete")]
         public IHttpActionResult Delete([FromBody] Movie movieData)

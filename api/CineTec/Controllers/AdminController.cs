@@ -16,18 +16,11 @@ namespace CineTec.Controllers
         static string jsonadmins = File.ReadAllText(pathadmin);
         static List<Admin> admins = JsonConvert.DeserializeObject<List<Admin>>(jsonadmins);
 
+        
         /*
-        public void updatejson() {
-            // Lee el contenido del JSON desde un archivo o una cadena
-            this.jsonadmins = File.ReadAllText(@"./admins.json");
-
-            // Deserializa el JSON en una lista de objetos Admin
-            this.admins = JsonConvert.DeserializeObject<List<Admin>>(jsonadmins);
-        }
+        * Get
+        * Retrieves a list with every Admin object from the stored data.
         */
-
-        //static Dictionary<string, Admin> admins = new Dictionary<string, Admin>();
-
         [HttpGet]
         [Route("api/admin")]
         public IEnumerable<Admin> Get()
@@ -35,7 +28,12 @@ namespace CineTec.Controllers
             return admins;
         }
 
-        // Post api/Admin/pedro@cinema.com
+        /*
+        * Handles the login request for an Admin.
+        *
+        * @param adminData The Admin object containing login information.
+        * @return An IHttpActionResult representing the result of the login attempt.
+        */
         [HttpPost]
         [Route("api/admin/login")]
         public IHttpActionResult Login([FromBody] Admin adminData)
@@ -54,6 +52,12 @@ namespace CineTec.Controllers
             return Ok(new {name=found.name }); // Retornamos el objeto Admin encontrado.
         }
 
+        /*
+        * Retrieves an Admin with the specified email.
+        *
+        * @param email The email address of the Admin to retrieve.
+        * @return An IHttpActionResult representing the result of the retrieval.
+        */
         [HttpGet]
         [Route("api/admin/pick")]
         public IHttpActionResult Get(string email)
@@ -68,21 +72,12 @@ namespace CineTec.Controllers
 
             return Ok(admin); // Return a 200 OK response with the admin data
         }
+
         /*
-        //POST api/Admin
-        public bool Post([FromBody] Admin admin)
-        {
-            Admin found;
-            admins.TryGetValue(admin.Email, out found);
-            if (found == null)
-            {
-                admins.Add(admin.Email, admin);
-                return true;
-            } else
-            {
-                return false;
-            }
-        }
+        * Adds a new Admin to the system.
+        *
+        * @param adminData The Admin object to be added.
+        * @return An IHttpActionResult representing the result of the addition.
         */
         [HttpPost]
         [Route("api/admin/add")]
@@ -103,7 +98,12 @@ namespace CineTec.Controllers
             return Ok("Admin added successfully");
         }
 
-        //DELETE api/Admin/pedro@cinema.com
+        /*
+        * Deletes an Admin with the specified ID from the system.
+        *
+        * @param id The ID of the Admin to delete.
+        * @return An IHttpActionResult representing the result of the deletion.
+        */
         [HttpDelete]
         [Route("api/admin/delete")]
         public IHttpActionResult Delete(string id)

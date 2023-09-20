@@ -17,6 +17,10 @@ namespace CineTec.Controllers
         static List<Cinema> cinemas = JsonConvert.DeserializeObject<List<Cinema>>(jsoncinemas);
 
 
+        /*
+        * Get
+        * Retrieves a list with every cinema object from the stored data.
+        */
         [HttpGet]
         [Route("api/cinema")]
         public IEnumerable<Cinema> Get()
@@ -24,7 +28,12 @@ namespace CineTec.Controllers
             return cinemas;
         }
 
-
+        /*
+        * Retrieves information about a Cinema by its name.
+        *
+        * @param cinemaData The Cinema object containing the name of the Cinema to retrieve.
+        * @return An IHttpActionResult representing the result of the retrieval.
+        */
         [HttpGet]
         [Route("api/cinema/find")]
         public IHttpActionResult Get([FromBody] Cinema cinemaData)
@@ -40,6 +49,12 @@ namespace CineTec.Controllers
             return Ok(cinema); // Return a 200 OK response with the cinema data
         }
 
+        /*
+        * Adds a new Cinema to the system.
+        *
+        * @param cinemaData The Cinema object to be added.
+        * @return An IHttpActionResult representing the result of the addition.
+        */
         [HttpPost]
         [Route("api/cinema/add")]
         public IHttpActionResult Post([FromBody] Cinema cinemaData)
@@ -59,7 +74,12 @@ namespace CineTec.Controllers
             return Ok(cinemas);
         }
 
-
+        /*
+        * Deletes a Cinema from the system by its name.
+        *
+        * @param cinemaData The Cinema object containing the name of the Cinema to delete.
+        * @return An IHttpActionResult representing the result of the deletion.
+        */
         [HttpDelete]
         [Route("api/cinema/delete")]
         public IHttpActionResult Delete([FromBody] Cinema cinemaData)

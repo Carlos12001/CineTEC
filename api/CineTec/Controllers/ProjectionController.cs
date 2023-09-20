@@ -14,7 +14,10 @@ namespace CineTec.Controllers
         static string jsonprojections = File.ReadAllText(pathprojection);
         static List<Projection> projections = JsonConvert.DeserializeObject<List<Projection>>(jsonprojections);
 
-
+        /*
+        * Get
+        * Retrieves a list with every room object from the stored data.
+        */
         [HttpGet]
         [Route("api/projection")]
         public IEnumerable<Projection> Get()
@@ -22,7 +25,12 @@ namespace CineTec.Controllers
             return projections;
         }
 
-
+        /*
+        * Retrieves information about a Projection by its ID.
+        *
+        * @param projectionData The Projection object containing the ID of the Projection to retrieve.
+        * @return An IHttpActionResult representing the result of the retrieval.
+        */
         [HttpGet]
         [Route("api/projection/find")]
         public IHttpActionResult Get([FromBody] Projection projectionData)
@@ -38,6 +46,13 @@ namespace CineTec.Controllers
             return Ok(projection); // Return a 200 OK response with the projection data
         }
 
+
+        /*
+        * Adds a new Projection to the system.
+        *
+        * @param projectionData The Projection object to be added.
+        * @return An IHttpActionResult representing the result of the addition.
+        */
         [HttpPost]
         [Route("api/projection/add")]
         public IHttpActionResult Post([FromBody] Projection projectionData)
@@ -57,7 +72,12 @@ namespace CineTec.Controllers
             return Ok(projections);
         }
 
-
+        /*
+        * Deletes a Projection from the system by its ID.
+        *
+        * @param projectionData The Projection object containing the ID of the Projection to delete.
+        * @return An IHttpActionResult representing the result of the deletion.
+        */
         [HttpDelete]
         [Route("api/projection/delete")]
         public IHttpActionResult Delete([FromBody] Projection projectionData)
