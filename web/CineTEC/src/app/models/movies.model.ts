@@ -11,7 +11,7 @@ export interface Movie {
 export const moviesExample: Movie[] = [
   {
     oname: 'The Dark Knight',
-    cname: 'El cabellero de la Noche',
+    cname: 'El Cabellero de la Noche',
     rating: 'EA',
     director: 'Christofer Nolan',
     duration: '02:40:00',

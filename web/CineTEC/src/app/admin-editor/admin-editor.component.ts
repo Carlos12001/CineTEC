@@ -30,6 +30,7 @@ export class AdminEditorComponent implements OnInit {
   }
 
   setSelectedEntity(entity: string) {
+    this.selectedMovie = null;
     this.selectedEntity = entity;
   }
 }
