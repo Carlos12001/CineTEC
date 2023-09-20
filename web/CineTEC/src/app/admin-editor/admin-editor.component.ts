@@ -13,8 +13,6 @@ import { Movie, moviesExample } from '../models/movies.model';
 export class AdminEditorComponent implements OnInit {
   dataAdmin: Admin | undefined;
 
-  selectedMovie: Movie | null = null;
-
   selectedEntity: string = '';
 
   entities = [
@@ -25,6 +23,10 @@ export class AdminEditorComponent implements OnInit {
   ];
 
   movies: Movie[] = moviesExample;
+
+  selectedMovie: Movie | null = null;
+
+  editingMovie: Movie | null = null;
 
   constructor(private router: Router) {}
 
@@ -43,13 +45,29 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  private deepCopy(obj: any): any {
+    if (obj === null || typeof obj !== 'object') {
+      return obj;
+    }
+
+    // Especifica el tipo aquí
+    const copy: Record<string, any> = Array.isArray(obj) ? [] : {};
+
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        copy[key] = this.deepCopy(obj[key]);
+      }
+    }
+    return copy;
+  }
+
   /**
    * Selects a movie.
    *
    * @param {Movie} movie - The movie to be selected.
    */
   selectMovie(movie: Movie) {
-    this.selectedMovie = movie;
+    this.selectedMovie = this.deepCopy(movie);
   }
 
   /**
@@ -58,8 +76,6 @@ export class AdminEditorComponent implements OnInit {
    * @param {string} entity - The entity to set as selected.
    */
   setSelectedEntity(entity: string) {
-    console.log('moivesExample: ', moviesExample);
-    console.log('movies: ', this.movies);
     this.selectedMovie = null;
     this.selectedEntity = entity;
   }
