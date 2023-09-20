@@ -18,6 +18,11 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <div *ngIf="selectedEntity === 'movies'">
+        <button class="add-entity-btn" (click)="addNewMovie()">
+          <i class="fas fa-plus-circle"></i>
+          Agregar película
+        </button>
+
         <ng-container *ngIf="movies && movies.length > 0; else noEntity">
           <ul>
             <li *ngFor="let movie of movies">
@@ -100,10 +105,10 @@
           </div>
           <button
             type="submit"
-            class="action-btn update-btn"
-            (click)="updateMovie()"
+            class="action-btn submit-btn"
+            (click)="submitMovie()"
           >
-            Actualizar Película
+            Subir Película
           </button>
           <button
             type="button"

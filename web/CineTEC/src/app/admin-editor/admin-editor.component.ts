@@ -26,6 +26,8 @@ export class AdminEditorComponent implements OnInit {
 
   selectedMovie: Movie | null = null;
 
+  originalMovie: Movie | null = null;
+
   editingMovie: Movie | null = null;
 
   constructor(private router: Router) {}
@@ -65,6 +67,7 @@ export class AdminEditorComponent implements OnInit {
     this.selectedEntity = '';
     // this.movies = [];
     this.selectedMovie = null;
+    this.originalMovie = null;
   }
 
   /**
@@ -84,16 +87,45 @@ export class AdminEditorComponent implements OnInit {
    */
   selectMovie(movie: Movie) {
     this.selectedMovie = this.deepCopy(movie);
+    this.originalMovie = movie;
   }
 
   /**
-   * Updates the movie.
+   * Submitthe movie.
    *
    * @param {type} paramName - description of parameter
    * @return {type} description of return value
    */
-  updateMovie() {
+  submitMovie() {
     if (this.selectedMovie) {
+      if (this.selectedMovie.oname === '--New Movie--') {
+        const newName = window.prompt(
+          'Introduce el nuevo nombre de la película'
+        );
+
+        if (newName === null || newName.trim() === '') {
+          console.log('Envío cancelado');
+          return;
+        }
+
+        const doesExist = this.movies.some((movie) => movie.oname === newName);
+
+        if (doesExist) {
+          window.alert(
+            'Ya existe una película con el mismo nombre. Por favor, elige otro nombre.'
+          );
+          return;
+        } else {
+          this.selectedMovie.oname = newName;
+        }
+      }
+      if (
+        JSON.stringify(this.originalMovie) ===
+        JSON.stringify(this.selectedMovie)
+      ) {
+        console.log('Ningún cambio detectado, envío cancelado.');
+        return;
+      }
       console.log('Actualizando película: ', this.selectedMovie);
     }
     this.selectedMovie = null;
@@ -175,5 +207,17 @@ export class AdminEditorComponent implements OnInit {
       console.log('Borrando película: ', this.selectedMovie);
     }
     this.selectedMovie = null;
+  }
+
+  addNewMovie() {
+    this.selectedMovie = {
+      oname: '--New Movie--',
+      cname: '',
+      rating: '',
+      director: '',
+      duration: '',
+      image: '',
+      prota: [],
+    };
   }
 }
