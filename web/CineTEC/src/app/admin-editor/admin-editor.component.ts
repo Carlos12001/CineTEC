@@ -23,7 +23,7 @@ export class AdminEditorComponent implements OnInit {
     { label: 'Salas', value: 'room' },
   ];
 
-  movies: Movie[] = moviesExample;
+  movies: Movie[] = [];
 
   ngOnInit(): void {
     this.dataAdmin = admin;

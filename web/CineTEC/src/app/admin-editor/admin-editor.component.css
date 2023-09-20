@@ -83,3 +83,14 @@
   background-color: #f0f0f0;
   transform: scale(1.05);
 }
+.no-entity-message {
+  color: red;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  border: 2px dashed red;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 0.1);
+}
