@@ -45,7 +45,7 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
-  private deepCopy(obj: any): any {
+  deepCopy(obj: any): any {
     if (obj === null || typeof obj !== 'object') {
       return obj;
     }
@@ -61,13 +61,10 @@ export class AdminEditorComponent implements OnInit {
     return copy;
   }
 
-  /**
-   * Selects a movie.
-   *
-   * @param {Movie} movie - The movie to be selected.
-   */
-  selectMovie(movie: Movie) {
-    this.selectedMovie = this.deepCopy(movie);
+  clearData() {
+    this.selectedEntity = '';
+    // this.movies = [];
+    this.selectedMovie = null;
   }
 
   /**
@@ -76,8 +73,17 @@ export class AdminEditorComponent implements OnInit {
    * @param {string} entity - The entity to set as selected.
    */
   setSelectedEntity(entity: string) {
-    this.selectedMovie = null;
+    this.clearData();
     this.selectedEntity = entity;
+  }
+
+  /**
+   * Selects a movie.
+   *
+   * @param {Movie} movie - The movie to be selected.
+   */
+  selectMovie(movie: Movie) {
+    this.selectedMovie = this.deepCopy(movie);
   }
 
   /**
@@ -90,6 +96,7 @@ export class AdminEditorComponent implements OnInit {
     if (this.selectedMovie) {
       console.log('Actualizando película: ', this.selectedMovie);
     }
+    this.selectedMovie = null;
   }
 
   /**
@@ -161,5 +168,12 @@ export class AdminEditorComponent implements OnInit {
    */
   trackByFunction(index: number, item: any): number {
     return index;
+  }
+
+  deleteMovie() {
+    if (this.selectedMovie) {
+      console.log('Borrando película: ', this.selectedMovie);
+    }
+    this.selectedMovie = null;
   }
 }
