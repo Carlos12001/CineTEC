@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Admin, admin } from '../models/admin.model';
 import { Movie, moviesExample } from '../models/movies.model';
 
@@ -23,7 +24,7 @@ export class AdminEditorComponent implements OnInit {
     { label: 'Salas', value: 'room' },
   ];
 
-  movies: Movie[] = [];
+  movies: Movie[] = moviesExample;
 
   ngOnInit(): void {
     this.dataAdmin = admin;
@@ -32,5 +33,43 @@ export class AdminEditorComponent implements OnInit {
   setSelectedEntity(entity: string) {
     this.selectedMovie = null;
     this.selectedEntity = entity;
+  }
+
+  updateMovie() {
+    if (this.selectedMovie) {
+      console.log('Actualizando película: ', this.selectedMovie);
+    }
+  }
+  addProta() {
+    if (this.selectedMovie && this.selectedMovie.prota) {
+      this.selectedMovie.prota.push('');
+    }
+  }
+
+  removeProta(index: number) {
+    if (this.selectedMovie && this.selectedMovie.prota) {
+      this.selectedMovie.prota.splice(index, 1);
+    }
+  }
+
+  getSafeProta(i: number): string {
+    if (
+      this.selectedMovie &&
+      this.selectedMovie.prota &&
+      this.selectedMovie.prota.length > i
+    ) {
+      return this.selectedMovie.prota[i];
+    }
+    return '';
+  }
+
+  setSafeProta(i: number, value: string): void {
+    if (
+      this.selectedMovie &&
+      this.selectedMovie.prota &&
+      this.selectedMovie.prota.length > i
+    ) {
+      this.selectedMovie.prota[i] = value;
+    }
   }
 }

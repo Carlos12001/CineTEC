@@ -38,10 +38,50 @@
     </div>
 
     <!-- Editor -->
+    <!-- Editor -->
     <div class="editor">
       <div *ngIf="selectedEntity === 'movies' && selectedMovie != null">
-        Movie details
         <h2>Editando: {{ selectedMovie?.oname }}</h2>
+        <form>
+          <div class="form-group">
+            <label for="cname">Nombre Comercial:</label>
+            <input id="cname" [(ngModel)]="selectedMovie.cname" name="cname" />
+          </div>
+          <div class="form-group">
+            <label for="rating">Clasificación:</label>
+            <input
+              id="rating"
+              [(ngModel)]="selectedMovie.rating"
+              name="rating"
+            />
+          </div>
+          <div class="form-group">
+            <label for="director">Director:</label>
+            <input
+              id="director"
+              [(ngModel)]="selectedMovie.director"
+              name="director"
+            />
+          </div>
+          <div class="form-group">
+            <label>Protagonistas:</label>
+            <div *ngFor="let prota of selectedMovie?.prota; let i = index">
+              <input
+                [ngModel]="getSafeProta(i)"
+                (ngModelChange)="setSafeProta(i, $event)"
+                name="prota{{ i }}"
+              />
+              <button type="button" (click)="removeProta(i)">
+                Eliminar Prota
+              </button>
+            </div>
+            <button type="button" (click)="addProta()">Agregar Prota</button>
+          </div>
+          <!-- más campos aquí -->
+          <button type="submit" (click)="updateMovie()">
+            Actualizar Película
+          </button>
+        </form>
       </div>
     </div>
   </div>
