@@ -13,6 +13,8 @@ class MovieDetails extends StatefulWidget {
 }
 
 class _MovieDetailsState extends State<MovieDetails> {
+
+  // TODO agregar lectura de la BD
   List<String> times = ["10:00", '15:00', '22:00'];
   String? selectedTime;
 

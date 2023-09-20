@@ -1,4 +1,3 @@
-import 'package:cinetec_mobile/classes/bd_manager.dart';
 import 'package:cinetec_mobile/classes/cinema.dart';
 import 'package:cinetec_mobile/components/ads_home_page.dart';
 import 'package:cinetec_mobile/components/showtime_home_page.dart';
@@ -42,7 +41,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   // Se encarga del manejo de paginas 
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   // Muestra el pais seleccionado en el dropdown
   String? selectedCountry;
   // Muestra la ciudad seleccionada en el dropdown

@@ -1,13 +1,13 @@
-import 'package:cinetec_mobile/main.dart';
 import 'package:flutter/material.dart';
 
 class SeatSelectionPage extends StatefulWidget {
   final String nameMovie;
   final String time;
 
-  SeatSelectionPage({required this.nameMovie, required this.time});
+  const SeatSelectionPage({super.key, required this.nameMovie, required this.time});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SeatSelectionPageState createState() => _SeatSelectionPageState();
 }
 
@@ -98,7 +98,6 @@ class _SeatSelectionPageState extends State<SeatSelectionPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                // TODO: Navegar a la página de confirmación u otra acción
                 _showSuccessDialog(context);
               },
               child: const Text("Confirmar asientos"),
