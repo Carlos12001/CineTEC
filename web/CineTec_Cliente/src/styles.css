@@ -1,0 +1,38 @@
+/* En styles.css o en un archivo CSS global */
+:root {
+    --text: #fdfcfc;
+    --background: #222222;
+    --primary: #01528f;
+    --secondary: #222222;
+    --accent: #404040;
+    --column1-bg: #343434;
+    --column2-bg: #2d2d2d;
+    --column3-bg: #272727;
+    --column4-bg: #212121;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: "Roboto", sans-serif;
+  
+    /* Añade estas líneas para el grid layout */
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+  
+  app-header {
+    grid-row: 1;
+  }
+  
+  main {
+    grid-row: 2;
+    min-height: calc(100vh);
+  }
+  
+  app-footer {
+    grid-row: 3;
+  }

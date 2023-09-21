@@ -1,0 +1,175 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seating Chart</title>
+    <style>
+        body {
+            overflow-y: auto;
+        }
+        .seating-container {
+            text-align: center;
+        }
+        
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: lightgray;
+            border: 1px solid gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        
+        .seat.selected {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="seating-container">
+        <h2>Seleccione sus asientos</h2>
+        
+        <div class="seats">
+            <div class="seat" id="A1" onclick="toggleSeatSelection('A1')">A1</div>
+            <div class="seat" id="A2" onclick="toggleSeatSelection('A2')">A2</div>
+            <div class="seat" id="A3" onclick="toggleSeatSelection('A3')">A3</div>
+            <div class="seat" id="A4" onclick="toggleSeatSelection('A4')">A4</div>
+            <div class="seat" id="A5" onclick="toggleSeatSelection('A5')">A5</div>
+            <div class="seat" id="A6" onclick="toggleSeatSelection('A6')">A6</div>
+            <div class="seat" id="A7" onclick="toggleSeatSelection('A7')">A7</div>
+            <div class="seat" id="A8" onclick="toggleSeatSelection('A8')">A8</div>
+            <div class="seat" id="A9" onclick="toggleSeatSelection('A9')">A9</div>
+            <div class="seat" id="A10" onclick="toggleSeatSelection('A10')">A10</div>
+            <div class="seat" id="B1" onclick="toggleSeatSelection('B1')">B1</div>
+            <div class="seat" id="B2" onclick="toggleSeatSelection('B2')">B2</div>
+            <div class="seat" id="B3" onclick="toggleSeatSelection('B3')">B3</div>
+            <div class="seat" id="B4" onclick="toggleSeatSelection('B4')">B4</div>
+            <div class="seat" id="B5" onclick="toggleSeatSelection('B5')">B5</div>
+            <div class="seat" id="B6" onclick="toggleSeatSelection('B6')">B6</div>
+            <div class="seat" id="B7" onclick="toggleSeatSelection('B7')">B7</div>
+            <div class="seat" id="B8" onclick="toggleSeatSelection('B8')">B8</div>
+            <div class="seat" id="B9" onclick="toggleSeatSelection('B9')">B9</div>
+            <div class="seat" id="B10" onclick="toggleSeatSelection('B10')">B10</div>
+
+            <div class="seat" id="C1" onclick="toggleSeatSelection('C1')">C1</div>
+            <div class="seat" id="C2" onclick="toggleSeatSelection('C2')">C2</div>
+            <div class="seat" id="C3" onclick="toggleSeatSelection('C3')">C3</div>
+            <div class="seat" id="C4" onclick="toggleSeatSelection('C4')">C4</div>
+            <div class="seat" id="C5" onclick="toggleSeatSelection('C5')">C5</div>
+            <div class="seat" id="C6" onclick="toggleSeatSelection('C6')">C6</div>
+            <div class="seat" id="C7" onclick="toggleSeatSelection('C7')">C7</div>
+            <div class="seat" id="C8" onclick="toggleSeatSelection('C8')">C8</div>
+            <div class="seat" id="C9" onclick="toggleSeatSelection('C9')">C9</div>
+            <div class="seat" id="C10" onclick="toggleSeatSelection('C10')">C10</div>
+
+            <div class="seat" id="D1" onclick="toggleSeatSelection('D1')">D1</div>
+            <div class="seat" id="D2" onclick="toggleSeatSelection('D2')">D2</div>
+            <div class="seat" id="D3" onclick="toggleSeatSelection('D3')">D3</div>
+            <div class="seat" id="D4" onclick="toggleSeatSelection('D4')">D4</div>
+            <div class="seat" id="D5" onclick="toggleSeatSelection('D5')">D5</div>
+            <div class="seat" id="D6" onclick="toggleSeatSelection('D6')">D6</div>
+            <div class="seat" id="D7" onclick="toggleSeatSelection('D7')">D7</div>
+            <div class="seat" id="D8" onclick="toggleSeatSelection('D8')">D8</div>
+            <div class="seat" id="D9" onclick="toggleSeatSelection('D9')">D9</div>
+            <div class="seat" id="D10" onclick="toggleSeatSelection('D10')">D10</div>
+
+            <div class="seat" id="E1" onclick="toggleSeatSelection('E1')">E1</div>
+            <div class="seat" id="E2" onclick="toggleSeatSelection('E2')">E2</div>
+            <div class="seat" id="E3" onclick="toggleSeatSelection('E3')">E3</div>
+            <div class="seat" id="E4" onclick="toggleSeatSelection('E4')">E4</div>
+            <div class="seat" id="E5" onclick="toggleSeatSelection('E5')">E5</div>
+            <div class="seat" id="E6" onclick="toggleSeatSelection('E6')">E6</div>
+            <div class="seat" id="E7" onclick="toggleSeatSelection('E7')">E7</div>
+            <div class="seat" id="E8" onclick="toggleSeatSelection('E8')">E8</div>
+            <div class="seat" id="E9" onclick="toggleSeatSelection('E9')">E9</div>
+            <div class="seat" id="E10" onclick="toggleSeatSelection('E10')">E10</div>
+          </div>
+        <!-- Continúa con las filas C a J -->
+        
+        <button id="purchase-button" onclick="purchaseSelectedSeats()">Comprar Asientos</button>
+        <button id="generate-xml-button" onclick="generateXMLInvoice()">Generar Factura XML</button>
+      </div>
+
+   <script>
+        const seatsContainer = document.querySelector('.seats');
+        const selectedSeats = [];
+
+        // Genera asientos A1 a E10
+        function generateSeats() {
+            for (let row = 'A'; row <= 'E'; row++) {
+                for (let seatNumber = 1; seatNumber <= 10; seatNumber++) {
+                    const seatId = `${row}${seatNumber}`;
+                    const seat = document.createElement('div');
+                    seat.classList.add('seat');
+                    seat.id = seatId;
+                    seat.textContent = seatId;
+                    seat.onclick = () => toggleSeatSelection(seatId);
+                    seatsContainer.appendChild(seat);
+                }
+            }
+        }
+
+        // Función para alternar la selección de asientos
+        function toggleSeatSelection(seatId) {
+            const seat = document.getElementById(seatId);
+            seat.classList.toggle('selected');
+
+            // Actualiza el array de asientos seleccionados
+            if (selectedSeats.includes(seatId)) {
+                selectedSeats.splice(selectedSeats.indexOf(seatId), 1);
+            } else {
+                selectedSeats.push(seatId);
+            }
+        }
+
+        // Función para comprar los asientos seleccionados y generar una factura
+        function purchaseSelectedSeats() {
+            if (selectedSeats.length === 0) {
+                alert('Por favor, seleccione al menos un asiento antes de comprar.');
+            } else {
+                const totalPrice = selectedSeats.length * 10; // Precio por asiento (cambiar según tus necesidades)
+                const invoice = `Factura de Compra:\nAsientos: ${selectedSeats.join(', ')}\nTotal a pagar: $${totalPrice}`;
+                alert(invoice);
+            }
+        }
+
+        // Función para generar una factura XML y permitir la descarga
+        function generateXMLInvoice() {
+            if (selectedSeats.length === 0) {
+                alert('Por favor, seleccione al menos un asiento antes de generar la factura XML.');
+            } else {
+                const xmlDoc = document.implementation.createDocument(null, 'invoice');
+                const seatsElement = xmlDoc.createElement('seats');
+                seatsElement.textContent = selectedSeats.join(', ');
+
+                const totalElement = xmlDoc.createElement('total');
+                const totalPrice = selectedSeats.length * 10; // Precio por asiento (cambiar según tus necesidades)
+                totalElement.textContent = totalPrice;
+
+                xmlDoc.documentElement.appendChild(seatsElement);
+                xmlDoc.documentElement.appendChild(totalElement);
+
+                const xmlString = new XMLSerializer().serializeToString(xmlDoc);
+
+                const downloadLink = document.createElement('a');
+                downloadLink.href = 'data:text/xml;charset=utf-8,' + encodeURIComponent(xmlString);
+                downloadLink.download = 'factura.xml';
+
+                downloadLink.click();
+            }
+        }
+
+        // Generar los asientos al cargar la página
+        generateSeats();
+    </script>
+
+</body>
+
+
+
