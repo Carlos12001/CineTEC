@@ -2,6 +2,8 @@ import 'package:cinetec_mobile/classes/movie.dart';
 import 'package:cinetec_mobile/components/seat_selection_page.dart';
 import 'package:flutter/material.dart';
 
+/// The `MovieDetails` class is a stateful widget that displays the details of a movie, including its
+/// title and information about the movie itself.
 class MovieDetails extends StatefulWidget {
   const MovieDetails({super.key, required this.title, required this.pelicula});
 
@@ -12,12 +14,24 @@ class MovieDetails extends StatefulWidget {
   State<MovieDetails> createState() => _MovieDetailsState();
 }
 
+/// The `_MovieDetailsState` class is responsible for displaying movie details and allowing the user to
+/// select a showtime and proceed to seat selection.
 class _MovieDetailsState extends State<MovieDetails> {
 
   // TODO agregar lectura de la BD
   List<String> times = ["10:00", '15:00', '22:00'];
   String? selectedTime;
 
+/// The `_showErrorDialog` function displays an error dialog with a title, content, and an OK button
+/// that closes the dialog when pressed.
+/// 
+/// Args:
+///   context (BuildContext): The `BuildContext` object represents the location in the widget tree where
+/// the dialog should be shown. It is typically obtained from the `BuildContext` parameter of the
+/// enclosing widget's build method.
+/// 
+/// Returns:
+///   The `_showErrorDialog` function returns an `AlertDialog` widget.
     void _showErrorDialog(BuildContext context) {
     showDialog(
       context: context,

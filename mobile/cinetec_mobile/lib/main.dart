@@ -1,5 +1,6 @@
 import 'package:cinetec_mobile/classes/bd_manager.dart';
 import 'package:cinetec_mobile/classes/cinema.dart';
+import 'package:cinetec_mobile/classes/movie.dart';
 import 'package:cinetec_mobile/components/ads_home_page.dart';
 import 'package:cinetec_mobile/components/showtime_home_page.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,13 @@ void main() {
   runApp(const MyApp());
 }
 
-// Clase main, se encarga de mostrar el home page
+
+/// The `MyApp` class is a StatelessWidget that represents the main application widget for a mobile app
+/// called "cineTEC mobile".
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // Widget principal 
+  // Widget principal
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,42 +33,64 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// The `MyHomePage` class is a stateful widget in Dart that represents a home page with a title.
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
+  /// The above code is declaring a final variable named "title" of type String in the Dart programming
+  /// language.
   final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+/// The `_MyHomePageState` class is a stateful widget that represents the state of the home page in a
+/// movie app, including the selected index, selected country, city, cinema, and lists of cinemas and
+/// movies.
 class _MyHomePageState extends State<MyHomePage> {
-
-  // Se encarga del manejo de paginas 
+  /// The above code is declaring a private integer variable named `_selectedIndex` and initializing it
+  /// with the value 1.
   int _selectedIndex = 1;
-  // Muestra el pais seleccionado en el dropdown
+
+  /// The above code is declaring a variable named "selectedCountry" of type String with a nullable
+  /// type.
   String? selectedCountry;
-  // Muestra la ciudad seleccionada en el dropdown
+
+  /// The above code is declaring a variable named "selectedCity" of type String with a nullable type.
   String? selectedCity;
-  // Muestra el nombre del cine seleccionado en el dropdown
+
+  /// The above code is declaring a variable named "selectedCinema" of type String with a nullable type
+  /// modifier.
   String? selectedCinema;
-  // Lista de los cines disponibles
+
+  /// The above code is declaring a nullable list variable called "cinemas" that can hold objects of
+  /// type "Cinema".
   List<Cinema>? cinemas;
+
+  /// The above code is declaring a nullable list variable named "movies" that can hold objects of type
+  /// "Movie" in the Dart programming language.
+  List<Movie>? movies;
   String? error;
 
- 
+  /// The initState function is being overridden to call the _fetchCinemas function when the state is
+  /// initialized.
   @override
   void initState() {
     super.initState();
     _fetchCinemas();
   }
 
+  /// The function `_fetchCinemas` fetches cinemas and movies, updates the state with the fetched data,
+  /// and handles any errors that occur during the process.
   _fetchCinemas() async {
     try {
       List<Cinema> fetchedCinemas = await fetchCinemas();
+      List<Movie> fetchedMovies = await fetchMovies();
       setState(() {
         print("fetched cinemas");
         cinemas = fetchedCinemas;
+        movies = fetchedMovies;
       });
     } catch (e) {
       setState(() {
@@ -75,8 +100,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
-  // Metodo encargado de de cambiar el contenido de la pagina segun el bottomnavigator
+  /// The function updates the selected index and triggers a state change.
+  ///
+  /// Args:
+  ///   index (int): The index parameter represents the index of the item that was tapped. It is used to
+  /// update the _selectedIndex variable, which is typically used to keep track of the currently selected
+  /// item in a list or menu.
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -97,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: homeNavigationBar(),
       body: <Widget>[
-        homePage(),
+        homePage(movies),
         locationPage(cinemas),
         Container(
           color: Colors.blue,
@@ -108,8 +137,15 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-// Widget encargado de mostrar la publicidad y las peliculas disponibles en cartelera
-  Column homePage() {
+  /// The `homePage` function returns a `Column` widget that displays an ad, a header, and a list of
+  /// movies.
+  ///
+  /// Args:
+  ///   moviesList (List<Movie>): The moviesList parameter is a list of Movie objects.
+  ///
+  /// Returns:
+  ///   a Column widget.
+  Column homePage(List<Movie>? moviesList) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -126,12 +162,16 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )),
         ),
-        carteleraHomePage(),
+        carteleraHomePage(moviesList),
       ],
     );
   }
 
-// Widget encargado del menu de navegacion inferior
+  /// The `homeNavigationBar` function returns a `BottomNavigationBar` widget with three items: "Inicio",
+  /// "Cine", and "Estrenos".
+  ///
+  /// Returns:
+  ///   a BottomNavigationBar widget.
   BottomNavigationBar homeNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xFF222222),
@@ -161,11 +201,30 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-// Widget de la pagina cine, como objetivo seleccionar 
+  /// The above code is creating a widget called `locationPage` in Dart language. This widget displays a
+  /// form where users can select a country, city, and cinema from dropdown menus. The selected values
+  /// are stored in variables `selectedCountry`, `selectedCity`, and `selectedCinema`. There is also a
+  /// button to save the selected location. The widget is organized using a `Column` widget and contains
+  /// various `Text`, `DropdownButton`, and `ElevatedButton` widgets to create the form.
   Column locationPage(List<Cinema>? cinemasList) {
-    // Listas de opciones para los dropdowns obtener del json
+    /// The line `List<String> countries = countryCinema(cinemasList);` is calling a function
+    /// `countryCinema` and assigning the returned value to the variable `countries`. The
+    /// `countryCinema` function takes a list of `Cinema` objects as an argument and returns a list of
+    /// country names extracted from those objects. So, `countries` will contain a list of country names
+    /// extracted from the `cinemasList`.
     List<String> countries = countryCinema(cinemasList);
+
+    /// The line `List<String> cities = cityCinema(cinemasList);` is calling a function `cityCinema` and
+    /// assigning the returned value to the variable `cities`. The `cityCinema` function takes a list of
+    /// `Cinema` objects as an argument and returns a list of city names extracted from those objects.
+    /// So, `cities` will contain a list of city names extracted from the `cinemasList`.
     List<String> cities = cityCinema(cinemasList);
+
+    /// The line `List<String> cinemas = theaterCinema(cinemasList)` is calling a function
+    /// `theaterCinema` and assigning the returned value to the variable `cinemas`. The `theaterCinema`
+    /// function takes a list of `Cinema` objects as an argument and returns a list of cinema names
+    /// extracted from those objects. So, `cinemas` will contain a list of cinema names extracted from
+    /// the `cinemasList`.
     List<String> cinemas = theaterCinema(cinemasList);
 
     return Column(

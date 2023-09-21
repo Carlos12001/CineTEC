@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 
+/// The SeatSelectionPage class is a StatefulWidget that represents a page for selecting seats for a
+/// movie and time.
 class SeatSelectionPage extends StatefulWidget {
+  /// The `final String nameMovie;` is a final variable declaration in the `SeatSelectionPage` class. It
+  /// is used to store the name of the movie for which the seats are being selected. The value of this
+  /// variable is passed to the `SeatSelectionPage` widget when it is created.
   final String nameMovie;
+ /// The `final String time;` is a final variable declaration in the `SeatSelectionPage` class. It is
+ /// used to store the time of the movie for which the seats are being selected. The value of this
+ /// variable is passed to the `SeatSelectionPage` widget when it is created.
   final String time;
 
+/// The `const SeatSelectionPage({super.key, required this.nameMovie, required this.time});` is the
+/// constructor of the `SeatSelectionPage` class. It takes three parameters: `key`, `nameMovie`, and
+/// `time`.
   const SeatSelectionPage({super.key, required this.nameMovie, required this.time});
 
   @override
@@ -11,10 +22,26 @@ class SeatSelectionPage extends StatefulWidget {
   _SeatSelectionPageState createState() => _SeatSelectionPageState();
 }
 
+/// The `_SeatSelectionPageState` class is a stateful widget that allows users to select seats for a
+/// movie and displays a success dialog when the seats are confirmed.
 class _SeatSelectionPageState extends State<SeatSelectionPage> {
+/// The line `List<List<bool>> seats = List.generate(4, (index) => List.generate(3, (index) => false));`
+/// is initializing a 2D list called `seats` with a size of 4 rows and 3 columns. Each element in the
+/// list is initialized as `false`. This list is used to keep track of the selected seats in the seat
+/// selection page.
   List<List<bool>> seats =
       List.generate(4, (index) => List.generate(3, (index) => false));
 
+ /// The function `_showSuccessDialog` displays a success dialog with a title, content, and an OK button
+ /// that closes the dialog and navigates back to different screens.
+ /// 
+ /// Args:
+ ///   context (BuildContext): The context parameter is the BuildContext object that represents the
+ /// current build context of the widget tree. It is used to access the current state of the widget and
+ /// to navigate between different screens or widgets.
+ /// 
+ /// Returns:
+ ///   The `_showSuccessDialog` function returns an `AlertDialog` widget.
   void _showSuccessDialog(BuildContext context) {
     showDialog(
       context: context,

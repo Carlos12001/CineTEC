@@ -1,3 +1,8 @@
+/* 
+ Clase encargada de manejar la información de cada pelicula
+ Parametros: nombre original, nombre comercial, path imagen, duracion, protagonistas
+             director, puntuacion
+ */
 class Movie {
   String oname;
   String cname;
@@ -18,7 +23,8 @@ class Movie {
     required this.rating,
   });
 
-    factory Movie.fromJson(Map<String, dynamic> json) {
+  // Metodo que permite construir un objeto pelicula a partir de un json
+  factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       oname: json['oname'],
       cname: json['cname'],

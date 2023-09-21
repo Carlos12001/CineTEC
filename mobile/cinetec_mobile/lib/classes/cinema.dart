@@ -1,3 +1,8 @@
+
+/* 
+ Clase encargada de manejar la información de cada cine
+ Parametros: nombre, provincia, pais, numero de salas, id sala
+ */
 class Cinema {
   String name;
   String province;
@@ -13,6 +18,7 @@ class Cinema {
       required this.roomsamount,
       required this.roomid});
 
+  // Metodo que permite construir un objeto cine a partir de un json
   factory Cinema.fromJson(Map<String, dynamic> json) {
     return Cinema(
       name: json['name'],
