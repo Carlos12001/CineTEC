@@ -5,6 +5,7 @@ import { AdminEditorService } from '../services/admin-editor.service';
 
 import { Admin, admin } from '../models/admin.model';
 import { Movie } from '../models/movies.model';
+import { Cinema } from '../models/cinema.model';
 
 @Component({
   selector: 'app-admin-editor',
@@ -279,6 +280,194 @@ export class AdminEditorComponent implements OnInit {
       duration: '',
       image: '',
       prota: [],
+    };
+  }
+
+  cinemas: Cinema[] = [];
+
+  selectedCinema: Cinema | null = null;
+
+  originalCinema: Cinema | null = null;
+
+  editingCinema: Cinema | null = null;
+
+  loadCinemas() {
+    this.adminEditorService.getCinemas().subscribe({
+      next: (data: Cinema[]) => {
+        this.cinemas = data; // Actualiza la variable de clase cinemas con los datos recibidos
+        console.log('Películas cargadas exitosamente.');
+      },
+      error: (err: any) => {
+        console.error('Error al cargar las películas:', err);
+        if (err.status === 404) {
+          console.log('No se encontraron películas.');
+        } else {
+          console.log('Ocurrió un error desconocido.', err);
+        }
+      },
+      complete: () => {
+        // Código a ejecutar cuando el observable se completa, si es necesario.
+        console.log('La carga de películas se ha completado.');
+      },
+    });
+  }
+
+  selectCinema(cinema: Cinema) {
+    this.selectedCinema = this.deepCopy(cinema);
+    this.originalCinema = cinema;
+  }
+
+  /**
+   * Submitthe cinema.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
+  submitCinema() {
+    if (this.selectedCinema) {
+      if (this.selectedCinema.name === '--New Cinema--') {
+        const newName = window.prompt(
+          'Introduce el nuevo nombre de la surcursal'
+        );
+
+        if (newName === null || newName.trim() === '') {
+          console.log('Envío cancelado');
+          return;
+        }
+
+        const doesExist = this.cinemas.some(
+          (cinema) => cinema.name === newName
+        );
+
+        if (doesExist) {
+          window.alert(
+            'Ya existe una surcursal con el mismo nombre. Por favor, elige otro nombre.'
+          );
+          return;
+        } else {
+          this.selectedCinema.name = newName;
+        }
+      }
+      if (
+        JSON.stringify(this.originalCinema) ===
+        JSON.stringify(this.selectedCinema)
+      ) {
+        console.log('Ningún cambio detectado, envío cancelado.');
+        return;
+      }
+
+      if (this.selectedCinema != null) {
+        this.deleteCinema();
+      }
+
+      this.adminEditorService.addCinema(this.selectedCinema).subscribe({
+        next: (data: Cinema[]) => {
+          console.log('surcursal agregada o actualizada exitosamente.');
+          this.cinemas = data;
+        },
+        error: (err: any) => {
+          console.error('Error al agregar o actualizar la surcursal:', err);
+          // Aquí puedes agregar más manejo de errores
+        },
+        complete: () => {
+          console.log('La operación de agregar o actualizar se ha completado.');
+        },
+      });
+    }
+  }
+
+  /**
+   * Adds a new item to the "roomid" array of the selected cinema, if the
+   * selected cinema and "roomid" array exist.
+   * @return {void} This function does not return anything.
+   */
+  addRoomid() {
+    if (this.selectedCinema && this.selectedCinema.roomid) {
+      this.selectedCinema.roomid.push('');
+    }
+  }
+
+  /**
+   * Removes an element from the `roomid` array of the `selectedCinema`
+   * object at the specified index.
+   *
+   * @param {number} index - The index of the element to be removed.
+   * @return {void} This function does not return anything.
+   */
+  removeRoomid(index: number) {
+    if (this.selectedCinema && this.selectedCinema.roomid) {
+      this.selectedCinema.roomid.splice(index, 1);
+    }
+  }
+
+  /**
+   * Retrieves the safe roomid at the specified index.
+   *
+   * @param {number} i - The index of the roomid to retrieve.
+   * @return {string} The safe roomid at the specified index, or an
+   * empty string if it does not exist.
+   */
+  getSafeRoomid(i: number): string {
+    if (
+      this.selectedCinema &&
+      this.selectedCinema.roomid &&
+      this.selectedCinema.roomid.length > i
+    ) {
+      return this.selectedCinema.roomid[i];
+    }
+    return '';
+  }
+
+  /**
+   * Sets the value of a specific element in the 'roomid' array of the
+   * selected cinema.
+   *
+   * @param {number} i - The index of the element to set.
+   * @param {string} value - The value to set.
+   * @return {void} This function does not return any value.
+   */
+  setSafeRoomid(i: number, value: string): void {
+    if (
+      this.selectedCinema &&
+      this.selectedCinema.roomid &&
+      this.selectedCinema.roomid.length > i
+    ) {
+      this.selectedCinema.roomid[i] = value;
+    }
+  }
+
+  deleteCinema() {
+    if (this.selectedCinema) {
+      this.adminEditorService.deleteCinema(this.selectedCinema).subscribe({
+        next: (data: Cinema[]) => {
+          console.log('surcursal borrada exitosamente:', this.selectedCinema);
+          this.clearData();
+          this.cinemas = data;
+        },
+        error: (err: any) => {
+          console.error('Error al borrar la surcursal:', err);
+          if (err.status === 404) {
+            console.log('La surcursal no se encontró.');
+          } else {
+            console.log('Ocurrió un error desconocido.', err);
+          }
+        },
+        complete: () => {
+          console.log('La operación de borrado se ha completado.');
+        },
+      });
+    }
+  }
+
+  addNewCinema() {
+    this.originalCinema = null;
+    this.loadCinemas();
+    this.selectedCinema = {
+      name: '--New Cinema--',
+      province: '',
+      country: '',
+      roomsamount: 0,
+      roomid: [],
     };
   }
 }
