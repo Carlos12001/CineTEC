@@ -34,42 +34,16 @@
     ]
   },
   {
-    "rating": "EA",
-    "director": "Isaac",
-    "duration": "25:00",
-    "image": "githubURL",
-    "cname": "Datos 1",
-    "oname": "Data Structure",
-    "prota": [
-      "Pedro",
-      "Juancho",
-      "Diosito"
-    ]
-  },
-  {
-    "rating": "+18",
+    "rating": "+18 uwu",
     "director": "Masayuki Kojima",
-    "duration": "1:59Ñ",
-    "image": "githubURLpng",
+    "duration": "01:59:00",
+    "image": "https://media.discordapp.net/attachments/753727372645367848/1154253986543718450/MV5BMDFlZjE5ZjctZTg2Yi00Njc5LThhMWMtOGQwMDU5NDc4ZDU0XkEyXkFqcGdeQXVyMTA4NjE0NjEy.png?width=395&height=593",
     "cname": "Tabidachi no Yoake",
     "oname": "Made in Abyss",
     "prota": [
       "Miyu Tomita",
       "Mariya Ise",
       "Seyaka Ohara"
-    ]
-  },
-  {
-    "rating": "EA",
-    "director": "Pedro Guitierrez",
-    "duration": "00:50:00",
-    "image": "githubURLpng",
-    "cname": "Intro al sufrimiento",
-    "oname": "Coding Intro",
-    "prota": [
-      "Pedro",
-      "Juancho",
-      "Morgan Freeman"
     ]
   }
 ]
