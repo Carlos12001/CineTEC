@@ -26,9 +26,9 @@
         <ng-container *ngIf="movies && movies.length > 0; else noEntity">
           <ul>
             <li *ngFor="let movie of movies">
-              <button class="movie-btn" (click)="selectMovie(movie)">
+              <button class="list-entities-btn" (click)="selectMovie(movie)">
                 <img [src]="movie.image" alt="{{ movie.oname }}" />
-                <div class="movie-info">
+                <div class="list-entities-info">
                   <h2>{{ movie.oname }}</h2>
                   <p>{{ movie.cname }}</p>
                 </div>
@@ -81,7 +81,7 @@
             <label for="image">Imagen URL:</label>
             <input id="image" [(ngModel)]="selectedMovie.image" name="image" />
           </div>
-          <div class="form-group prota-container">
+          <div class="form-group list-container">
             <label>Protagonistas:</label>
             <div
               *ngFor="

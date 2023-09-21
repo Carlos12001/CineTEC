@@ -49,7 +49,7 @@
   font-weight: bolder;
 }
 
-.movie-btn {
+.list-entities-btn {
   display: flex;
   align-items: center;
   border-radius: 12px;
@@ -60,29 +60,29 @@
   transition: 0.2s;
 }
 
-.movie-btn img {
+.list-entities-btn img {
   width: 50px;
   height: auto;
   border-radius: 8px;
 }
 
-.movie-info {
+.list-entities-info {
   margin-left: 8px;
 }
 
-.movie-info h2 {
+.list-entities-info h2 {
   font-size: 1.2em;
   margin: 0.1em;
 }
 
-.movie-info p {
+.list-entities-info p {
   font-size: 0.8em;
   color: #777;
   margin: 0;
 }
 
-.movie-btn:hover,
-.movie-btn:focus {
+.list-entities-btn:hover,
+.list-entities-btn:focus {
   background-color: #f0f0f0;
   transform: scale(1.05);
 }
@@ -150,7 +150,7 @@
   background-color: var(--accent);
 }
 
-.prota-container {
+.list-container {
   max-height: 5em;
   overflow-y: auto;
   border: 1px solid #ccc;
