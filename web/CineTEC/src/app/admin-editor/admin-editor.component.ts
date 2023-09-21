@@ -30,7 +30,13 @@ export class AdminEditorComponent implements OnInit {
 
   originalMovie: Movie | null = null;
 
-  editingMovie: Movie | null = null;
+  cinemas: Cinema[] = [];
+
+  selectedCinema: Cinema | null = null;
+
+  originalCinema: Cinema | null = null;
+
+  editingCinema: Cinema | null = null;
 
   constructor(
     private router: Router,
@@ -72,6 +78,20 @@ export class AdminEditorComponent implements OnInit {
     this.movies = [];
     this.selectedMovie = null;
     this.originalMovie = null;
+    this.cinemas = [];
+    this.selectedCinema = null;
+    this.originalCinema = null;
+  }
+
+  /**
+   * A function that tracks the index of an item.
+   *
+   * @param {number} index - The index of the item.
+   * @param {any} item - The item being tracked.
+   * @return {number} The index of the item.
+   */
+  trackByFunction(index: number, item: any): number {
+    return index;
   }
 
   /**
@@ -85,7 +105,16 @@ export class AdminEditorComponent implements OnInit {
     if (entity === 'movies') {
       this.loadMovies();
     }
+    if (entity === 'cinemas') {
+      this.loadCinemas();
+    }
   }
+
+  //
+  //
+  // Movies
+  //
+  //
 
   loadMovies() {
     this.adminEditorService.getMovies().subscribe({
@@ -235,17 +264,6 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
-  /**
-   * A function that tracks the index of an item.
-   *
-   * @param {number} index - The index of the item.
-   * @param {any} item - The item being tracked.
-   * @return {number} The index of the item.
-   */
-  trackByFunction(index: number, item: any): number {
-    return index;
-  }
-
   deleteMovie() {
     if (this.selectedMovie) {
       this.adminEditorService.deleteMovie(this.selectedMovie).subscribe({
@@ -283,13 +301,11 @@ export class AdminEditorComponent implements OnInit {
     };
   }
 
-  cinemas: Cinema[] = [];
-
-  selectedCinema: Cinema | null = null;
-
-  originalCinema: Cinema | null = null;
-
-  editingCinema: Cinema | null = null;
+  //
+  //
+  // CINEMAS
+  //
+  //
 
   loadCinemas() {
     this.adminEditorService.getCinemas().subscribe({
