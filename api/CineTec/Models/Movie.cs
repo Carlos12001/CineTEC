@@ -5,8 +5,10 @@ using System.Web;
 
 namespace CineTec.Models
 {
+    //Clase Movie used to store temporally data relationed with the object.
     public class Movie
     {
+        //sets and gets for every property
         public string rating { get; set; }
         public string director { get; set; }
         public string duration { get; set; }
