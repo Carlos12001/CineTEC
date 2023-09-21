@@ -1,3 +1,4 @@
+import 'package:cinetec_mobile/classes/bd_manager.dart';
 import 'package:cinetec_mobile/classes/cinema.dart';
 import 'package:cinetec_mobile/components/ads_home_page.dart';
 import 'package:cinetec_mobile/components/showtime_home_page.dart';
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Cinema>? cinemas;
   String? error;
 
- /*
+ 
   @override
   void initState() {
     super.initState();
@@ -73,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
-*/
+
 
   // Metodo encargado de de cambiar el contenido de la pagina segun el bottomnavigator
   void _onItemTapped(int index) {
@@ -163,9 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
 // Widget de la pagina cine, como objetivo seleccionar 
   Column locationPage(List<Cinema>? cinemasList) {
     // Listas de opciones para los dropdowns obtener del json
-    List<String> countries = ['USA', 'Canada', 'Mexico'];
-    List<String> cities = ['City 1', 'City 2', 'City 3'];
-    List<String> cinemas = ['Cinema 1', 'Cinema 2', 'Cinema 3'];
+    List<String> countries = countryCinema(cinemasList);
+    List<String> cities = cityCinema(cinemasList);
+    List<String> cinemas = theaterCinema(cinemasList);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

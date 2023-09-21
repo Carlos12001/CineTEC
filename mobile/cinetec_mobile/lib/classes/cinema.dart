@@ -19,7 +19,7 @@ class Cinema {
       province: json['province'],
       country: json['country'],
       roomsamount: json['roomsamount'],
-      roomid: json['roomid'],
+      roomid: [1,2], // revisar como pasar esto
     );
   }
 }
