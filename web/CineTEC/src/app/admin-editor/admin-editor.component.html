@@ -42,6 +42,30 @@
           </div>
         </ng-template>
       </div>
+      <div *ngIf="selectedEntity === 'cinemas'">
+        <button class="add-entity-btn" (click)="addNewCinema()">
+          <i class="fas fa-plus-circle"></i>
+          Agregar Surcursal
+        </button>
+
+        <ng-container *ngIf="cinemas && cinemas.length > 0; else noEntity">
+          <ul>
+            <li *ngFor="let cinema of cinemas">
+              <button class="list-entities-btn" (click)="selectCinema(cinema)">
+                <div class="list-entities-info">
+                  <h2>{{ cinema.name }}</h2>
+                  <p>{{ cinema.province }}</p>
+                </div>
+              </button>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #noEntity>
+          <div class="no-entity-message">
+            <p>No se encontraron surcursales 🍿</p>
+          </div>
+        </ng-template>
+      </div>
     </div>
 
     <!-- Editor -->
@@ -117,6 +141,72 @@
             (click)="deleteMovie()"
           >
             Eliminar Película
+          </button>
+        </form>
+      </div>
+      <div *ngIf="selectedEntity === 'cinemas' && selectedCinema != null">
+        <h2>Editando: {{ selectedCinema.name }}</h2>
+        <form>
+          <div class="form-group">
+            <label for="province">Nombre Provincia:</label>
+            <input
+              id="province"
+              [(ngModel)]="selectedCinema.province"
+              name="province"
+            />
+          </div>
+          <div class="form-group">
+            <label for="country">Pais:</label>
+            <input
+              id="country"
+              [(ngModel)]="selectedCinema.country"
+              name="country"
+            />
+          </div>
+          <div class="form-group">
+            <label for="roomsamount">Cantidad de salas:</label>
+            <input
+              id="roomsamount"
+              [(ngModel)]="selectedCinema.roomsamount"
+              name="roomsamount"
+            />
+          </div>
+          <div class="form-group list-container">
+            <label>ID Sala:</label>
+            <div
+              *ngFor="
+                let roomid of selectedCinema?.roomid;
+                let i = index;
+                trackBy: trackByFunction
+              "
+            >
+              <input
+                [ngModel]="getSafeRoomid(i)"
+                (ngModelChange)="setSafeRoomid(i, $event)"
+                name="roomid{{ i }}"
+              />
+              <button type="button" (click)="removeRoomid(i)">
+                <i class="fas fa-trash"></i> Eliminar Roomid
+              </button>
+            </div>
+            <button type="button" (click)="addRoomid()">
+              <i class="fas fa-plus"></i> Agregar Roomid
+            </button>
+          </div>
+          <button
+            type="submit"
+            class="action-btn submit-btn"
+            (click)="submitCinema()"
+          >
+            Subir Sucursal
+          </button>
+          <button
+            *ngIf="selectedCinema.name !== '--New Cinema--'"
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteCinema()"
+          >
+            Eliminar Sucursal
           </button>
         </form>
       </div>
