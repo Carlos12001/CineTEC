@@ -13,6 +13,6 @@ namespace CineTec.Models
         public string province { get; set; }
         public string country { get; set; }
         public int roomsamount { get; set; }
-        public List<int> roomid { get; set; }
+        public List<string> roomid { get; set; }
     }
 }
