@@ -42,6 +42,7 @@
           </div>
         </ng-template>
       </div>
+      <!-- CINEMAS -->
       <div *ngIf="selectedEntity === 'cinemas'">
         <button class="add-entity-btn" (click)="addNewCinema()">
           <i class="fas fa-plus-circle"></i>
@@ -66,10 +67,42 @@
           </div>
         </ng-template>
       </div>
+      <!-- PROJECTIONS -->
+      <div *ngIf="selectedEntity === 'projections'">
+        <button class="add-entity-btn" (click)="addNewProjection()">
+          <i class="fas fa-plus-circle"></i>
+          Agregar Surcursal
+        </button>
+
+        <ng-container
+          *ngIf="projections && projections.length > 0; else noEntity"
+        >
+          <ul>
+            <li *ngFor="let projection of projections">
+              <button
+                class="list-entities-btn"
+                (click)="selectProjection(projection)"
+              >
+                <div class="list-entities-info">
+                  <h2>{{ projection.id }}</h2>
+                  <p>{{ projection.roomid }}</p>
+                  <p>{{ projection.movieid }}</p>
+                </div>
+              </button>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #noEntity>
+          <div class="no-entity-message">
+            <p>No se encontraron proyecciones 🎥</p>
+          </div>
+        </ng-template>
+      </div>
     </div>
 
     <!-- Editor -->
     <div class="editor">
+      <!-- MOVIES -->
       <div *ngIf="selectedEntity === 'movies' && selectedMovie != null">
         <h2>Editando: {{ selectedMovie.oname }}</h2>
         <form>
@@ -144,6 +177,7 @@
           </button>
         </form>
       </div>
+      <!-- CINEMAS -->
       <div *ngIf="selectedEntity === 'cinemas' && selectedCinema != null">
         <h2>Editando: {{ selectedCinema.name }}</h2>
         <form>
@@ -160,7 +194,7 @@
             <input
               id="country"
               [(ngModel)]="selectedCinema.country"
-              name="country"
+              name="roomid"
             />
           </div>
           <div class="form-group">
@@ -207,6 +241,53 @@
             (click)="deleteCinema()"
           >
             Eliminar Sucursal
+          </button>
+        </form>
+      </div>
+      <!-- PROJECTIONS -->
+      <div
+        *ngIf="selectedEntity === 'projections' && selectedProjection != null"
+      >
+        <h2>Editando: {{ selectedProjection.id }}</h2>
+        <form>
+          <div class="form-group">
+            <label for="horary">Horario:</label>
+            <input
+              id="horary"
+              [(ngModel)]="selectedProjection.horary"
+              name="horary"
+            />
+          </div>
+          <div class="form-group">
+            <label for="roomid">ID Sala:</label>
+            <input
+              id="roomid"
+              [(ngModel)]="selectedProjection.roomid"
+              name="roomid"
+            />
+          </div>
+          <div class="form-group">
+            <label for="movieid">Cantidad de salas:</label>
+            <input
+              id="movieid"
+              [(ngModel)]="selectedProjection.movieid"
+              name="movieid"
+            />
+          </div>
+          <button
+            type="submit"
+            class="action-btn submit-btn"
+            (click)="submitProjection()"
+          >
+            Subir Proyección
+          </button>
+          <button
+            *ngIf="selectedProjection.id !== '--New Projection--'"
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteProjection()"
+          >
+            Eliminar Proyección
           </button>
         </form>
       </div>

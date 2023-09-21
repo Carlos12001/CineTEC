@@ -1,0 +1,14 @@
+[
+  {
+    "id": "p1",
+    "horary": "15/12",
+    "roomid": "room1",
+    "movieid": "cineTEC"
+  },
+  {
+    "id": "p2",
+    "horary": "16/12",
+    "roomid": "room2",
+    "movieid": "cineTEC"
+  }
+]

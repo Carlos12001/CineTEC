@@ -6,6 +6,7 @@ import { AdminEditorService } from '../services/admin-editor.service';
 import { Admin, admin } from '../models/admin.model';
 import { Movie } from '../models/movies.model';
 import { Cinema } from '../models/cinema.model';
+import { Projection } from '../models/projection.model';
 
 @Component({
   selector: 'app-admin-editor',
@@ -36,7 +37,11 @@ export class AdminEditorComponent implements OnInit {
 
   originalCinema: Cinema | null = null;
 
-  editingCinema: Cinema | null = null;
+  projections: Projection[] = [];
+
+  selectedProjection: Projection | null = null;
+
+  originalProjection: Projection | null = null;
 
   constructor(
     private router: Router,
@@ -81,6 +86,9 @@ export class AdminEditorComponent implements OnInit {
     this.cinemas = [];
     this.selectedCinema = null;
     this.originalCinema = null;
+    this.projections = [];
+    this.selectedProjection = null;
+    this.originalProjection = null;
   }
 
   /**
@@ -107,6 +115,9 @@ export class AdminEditorComponent implements OnInit {
     }
     if (entity === 'cinemas') {
       this.loadCinemas();
+    }
+    if (entity === 'projections') {
+      this.loadProjections();
     }
   }
 
@@ -311,19 +322,19 @@ export class AdminEditorComponent implements OnInit {
     this.adminEditorService.getCinemas().subscribe({
       next: (data: Cinema[]) => {
         this.cinemas = data; // Actualiza la variable de clase cinemas con los datos recibidos
-        console.log('Películas cargadas exitosamente.');
+        console.log('Sucursales cargadas exitosamente.');
       },
       error: (err: any) => {
-        console.error('Error al cargar las películas:', err);
+        console.error('Error al cargar las sucursales:', err);
         if (err.status === 404) {
-          console.log('No se encontraron películas.');
+          console.log('No se encontraron sucursales.');
         } else {
           console.log('Ocurrió un error desconocido.', err);
         }
       },
       complete: () => {
         // Código a ejecutar cuando el observable se completa, si es necesario.
-        console.log('La carga de películas se ha completado.');
+        console.log('La carga de sucursales se ha completado.');
       },
     });
   }
@@ -484,6 +495,136 @@ export class AdminEditorComponent implements OnInit {
       country: '',
       roomsamount: 0,
       roomid: [],
+    };
+  }
+
+  //
+  //
+  // PROJECTIONS
+  //
+  //
+
+  loadProjections() {
+    this.adminEditorService.getProjections().subscribe({
+      next: (data: Projection[]) => {
+        this.projections = data; // Actualiza la variable de clase projections con los datos recibidos
+        console.log('Proyecciones cargadas exitosamente.');
+      },
+      error: (err: any) => {
+        console.error('Error al cargar las proyecciones:', err);
+        if (err.status === 404) {
+          console.log('No se encontraron proyecciones.');
+        } else {
+          console.log('Ocurrió un error desconocido.', err);
+        }
+      },
+      complete: () => {
+        // Código a ejecutar cuando el observable se completa, si es necesario.
+        console.log('La carga de proyecciones se ha completado.');
+      },
+    });
+  }
+
+  selectProjection(projection: Projection) {
+    this.selectedProjection = this.deepCopy(projection);
+    this.originalProjection = projection;
+  }
+
+  /**
+   * Submitthe projection.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
+  submitProjection() {
+    if (this.selectedProjection) {
+      if (this.selectedProjection.id === '--New Projection--') {
+        const newName = window.prompt(
+          'Introduce el nuevo nombre de la projecciones'
+        );
+
+        if (newName === null || newName.trim() === '') {
+          console.log('Envío cancelado');
+          return;
+        }
+
+        const doesExist = this.projections.some(
+          (projection) => projection.id === newName
+        );
+
+        if (doesExist) {
+          window.alert(
+            'Ya existe una projecciones con el mismo nombre. Por favor, elige otro nombre.'
+          );
+          return;
+        } else {
+          this.selectedProjection.id = newName;
+        }
+      }
+      if (
+        JSON.stringify(this.originalProjection) ===
+        JSON.stringify(this.selectedProjection)
+      ) {
+        console.log('Ningún cambio detectado, envío cancelado.');
+        return;
+      }
+
+      if (this.selectedProjection != null) {
+        this.deleteProjection();
+      }
+
+      this.adminEditorService.addProjection(this.selectedProjection).subscribe({
+        next: (data: Projection[]) => {
+          console.log('projecciones agregada o actualizada exitosamente.');
+          this.projections = data;
+        },
+        error: (err: any) => {
+          console.error('Error al agregar o actualizar la projecciones:', err);
+          // Aquí puedes agregar más manejo de errores
+        },
+        complete: () => {
+          console.log('La operación de agregar o actualizar se ha completado.');
+        },
+      });
+    }
+  }
+
+  deleteProjection() {
+    if (this.selectedProjection) {
+      this.adminEditorService
+        .deleteProjection(this.selectedProjection)
+        .subscribe({
+          next: (data: Projection[]) => {
+            console.log(
+              'projecciones borrada exitosamente:',
+              this.selectedProjection
+            );
+            this.clearData();
+            this.projections = data;
+          },
+          error: (err: any) => {
+            console.error('Error al borrar la projecciones:', err);
+            if (err.status === 404) {
+              console.log('La projecciones no se encontró.');
+            } else {
+              console.log('Ocurrió un error desconocido.', err);
+            }
+          },
+          complete: () => {
+            console.log('La operación de borrado se ha completado.');
+          },
+        });
+    }
+  }
+
+  addNewProjection() {
+    this.originalProjection = null;
+    this.loadProjections();
+    this.selectedProjection = {
+      id: '--New Projection--',
+      horary: '',
+      roomid: '',
+      movieid: '',
     };
   }
 }

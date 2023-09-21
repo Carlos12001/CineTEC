@@ -9,9 +9,9 @@ namespace CineTec.Models
     public class Projection
     {
         //sets and gets for every property
-        public int id { get; set; }
-        public DateTime horary { get; set; }
-        public int roomid { get; set; }
+        public string id { get; set; }
+        public string horary { get; set; }
+        public string roomid { get; set; }
         public string movieid { get; set; }
     }
 }
