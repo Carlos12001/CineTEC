@@ -45,5 +45,33 @@
       "Mariya Ise",
       "Seyaka Ohara"
     ]
+  },
+  {
+    "rating": "18+",
+    "director": "Steven Spilberg",
+    "duration": "01:16:00",
+    "image": "https://upload.wikimedia.org/wikipedia/en/9/9a/The_nightmare_before_christmas_poster.jpg",
+    "cname": "El Extraño Mundo de Jack",
+    "oname": "The Nightmare Before Christmas",
+    "prota": [
+      "jack"
+    ]
+  },
+  {
+    "rating": "UWU",
+    "director": "Irvin Kershner",
+    "duration": "01:04:00",
+    "image": "https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg",
+    "cname": "Star Wars: El Imperio Contraataca",
+    "oname": "Star Wars: The Empire Strikes Back",
+    "prota": [
+      "Mark Hamill",
+      "Harrison Ford",
+      "Carrie Fisher",
+      "Billy Dee Williams",
+      "Peter Mayhew",
+      "Frank Oz",
+      "Anthony Daniels"
+    ]
   }
 ]
