@@ -5,6 +5,7 @@ import 'package:cinetec_mobile/components/ads_home_page.dart';
 import 'package:cinetec_mobile/components/showtime_home_page.dart';
 import 'package:flutter/material.dart';
 
+/// The main function runs the MyApp widget as the root of the application.
 void main() {
   runApp(const MyApp());
 }
@@ -148,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: Alignment.center,
           child: const Text(
             'Proximamente...',
-            style: const TextStyle(fontSize: 30, color: Color(0xFFfdfcfc)),
+            style: TextStyle(fontSize: 30, color: Color(0xFFfdfcfc)),
           ),
         ),
       ][_selectedIndex],
