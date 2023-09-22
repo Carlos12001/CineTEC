@@ -1,3 +1,4 @@
+/* The `export interface Cinema` is defining the structure of an object that represents a cinema. It has the following properties: */
 export interface Cinema {
   name: string;
   province: string;
@@ -6,6 +7,7 @@ export interface Cinema {
   roomid: string[];
 }
 
+/* The `export const cinemasExample` is an array of objects that represents a list of cinemas. Each object in the array represents a cinema and has properties such as `name`, `province`, `country`, `roomsamount`, and `roomid`. */
 export const cinemasExample: Cinema[] = [
   {
     name: 'cineTEC',

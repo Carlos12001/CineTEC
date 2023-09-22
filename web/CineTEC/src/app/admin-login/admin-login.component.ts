@@ -23,6 +23,12 @@ export class AdminLoginComponent {
     });
   }
 
+  /**
+   * Executes the login process when the form is submitted.
+   *
+   * @param {}
+   * @return {}
+   */
   onSubmited() {
     if (this.loginForm.valid) {
       admin.email = this.loginForm.value.email;

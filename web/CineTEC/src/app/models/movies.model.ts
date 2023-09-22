@@ -1,3 +1,4 @@
+/* The code is defining an interface called `Movie`. An interface in TypeScript is a way to define the structure of an object. In this case, the `Movie` interface has several properties: */
 export interface Movie {
   oname: string;
   cname: string;
@@ -8,6 +9,7 @@ export interface Movie {
   prota: string[];
 }
 
+/* The code is creating an array called `moviesExample` which contains two objects. Each object represents a movie and follows the structure defined by the `Movie` interface. Each movie object has properties such as `oname` (original name), `cname` (translated name), `rating`, `director`, `duration`, `image`, and `prota` (an array of main actors/actresses). The objects in the `moviesExample` array represent the movies "The Dark Knight" and "Star Wars: The Empire Strikes Back" along with their respective details. */
 export const moviesExample: Movie[] = [
   {
     oname: 'The Dark Knight',

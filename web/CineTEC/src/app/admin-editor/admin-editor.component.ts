@@ -14,11 +14,16 @@ import { Room } from '../models/room.model';
   templateUrl: './admin-editor.component.html',
   styleUrls: ['./admin-editor.component.css'],
 })
+
+/** The AdminEditorComponent class represents the component that manages the editing of movies, cinemas, projections, and rooms. */
 export class AdminEditorComponent implements OnInit {
+  /* The above code is declaring a variable named "dataAdmin" of type "Admin" or "undefined" in TypeScript. */
   dataAdmin: Admin | undefined;
 
+  /* The above code is declaring a variable named "selectedEntity" of type string and initializing it with an empty string. */
   selectedEntity: string = '';
 
+  /* The above code is declaring an array called "entities" which contains objects with two properties: "label" and "value". Each object represents an entity and its corresponding value. The entities included in the array are "Películas" (Movies), "Sucursales" (Cinemas), "Proyecciones" (Projections), and "Salas" (Rooms). */
   entities = [
     { label: 'Películas', value: 'movies' },
     { label: 'Sucursales', value: 'cinemas' },
@@ -26,30 +31,47 @@ export class AdminEditorComponent implements OnInit {
     { label: 'Salas', value: 'rooms' },
   ];
 
+  /* The above code is declaring a variable named "movies" and assigning it an empty array of type "Movie". */
   movies: Movie[] = [];
 
+  /* The above code is declaring a variable named "selectedMovie" of type "Movie" or "null". */
   selectedMovie: Movie | null = null;
 
+  /* The above code is declaring a class in TypeScript with a property named "originalMovie" that can hold a value of type "Movie" or null. The initial value of "originalMovie" is set to null. */
   originalMovie: Movie | null = null;
 
+  /* The above code is declaring a variable called "cinemas" and assigning it an empty array of type "Cinema". */
   cinemas: Cinema[] = [];
 
+  /* The above code is declaring a variable named `selectedCinema` of type `Cinema` or `null` in TypeScript. */
   selectedCinema: Cinema | null = null;
 
+  /* The above code is declaring a class in TypeScript called "Cinema" and initializing a variable called "originalCinema" with a value of null. The variable is of type "Cinema" or null, indicating that it can either hold an instance of the "Cinema" class or be null. */
   originalCinema: Cinema | null = null;
 
+  /* The above code is declaring a class property called "projections" which is an array of objects of type "Projection". */
   projections: Projection[] = [];
 
+  /* The above code is declaring a variable named "selectedProjection" of type "Projection" or null. It is initially set to null. */
   selectedProjection: Projection | null = null;
 
+  /* The above code is declaring a class property named "originalProjection" of type "Projection" or null. */
   originalProjection: Projection | null = null;
 
+  /* The above code is declaring a variable called "rooms" and assigning it an empty array of type "Room". */
   rooms: Room[] = [];
 
+  /* The above code is declaring a variable named `selectedRoom` of type `Room` or `null`. */
   selectedRoom: Room | null = null;
 
+  /* The above code is declaring a class in TypeScript called "Room" with a property called "originalRoom" that can hold either a value of type "Room" or null. The initial value of "originalRoom" is set to null. */
   originalRoom: Room | null = null;
 
+  /**
+   * The constructor function initializes private properties for the router and adminEditorService.
+   * @param {Router} router - The `router` parameter is an instance of the `Router` class, which is used for navigating between different routes in an Angular application. It allows you to programmatically navigate to different views or components.
+   * @param {AdminEditorService} adminEditorService - The `adminEditorService` parameter is an instance of the `AdminEditorService` class. It is used to interact with the backend and perform administrative tasks related to editing content.
+   */
   constructor(
     private router: Router,
     private adminEditorService: AdminEditorService
@@ -70,6 +92,12 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Creates a deep copy of an object.
+   *
+   * @param {any} obj - The object to be copied.
+   * @return {any} The deep copy of the object.
+   */
   deepCopy(obj: any): any {
     if (obj === null || typeof obj !== 'object') {
       return obj;
@@ -86,6 +114,9 @@ export class AdminEditorComponent implements OnInit {
     return copy;
   }
 
+  /**
+   * Clear all data in the class variables.
+   */
   clearData() {
     this.movies = [];
     this.selectedMovie = null;
@@ -140,6 +171,11 @@ export class AdminEditorComponent implements OnInit {
   //
   //
 
+  /**
+   * Loads the movies by making a request to the server and updating the `movies` class variable with the received data.
+   *
+   * @return {void}
+   */
   loadMovies() {
     this.adminEditorService.getMovies().subscribe({
       next: (data: Movie[]) => {
@@ -288,6 +324,11 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Deletes the selected movie.
+   *
+   * @return {void} This function does not return anything.
+   */
   deleteMovie() {
     if (this.selectedMovie) {
       this.adminEditorService.deleteMovie(this.selectedMovie).subscribe({
@@ -311,6 +352,12 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Adds a new movie to the list.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
   addNewMovie() {
     this.originalMovie = null;
     this.loadMovies();
@@ -331,6 +378,11 @@ export class AdminEditorComponent implements OnInit {
   //
   //
 
+  /**
+   * Loads the cinemas by making a request to the server.
+   *
+   * @return {void} This function does not return anything.
+   */
   loadCinemas() {
     this.adminEditorService.getCinemas().subscribe({
       next: (data: Cinema[]) => {
@@ -352,6 +404,11 @@ export class AdminEditorComponent implements OnInit {
     });
   }
 
+  /**
+   * Selects a cinema.
+   *
+   * @param {Cinema} cinema - The cinema to be selected.
+   */
   selectCinema(cinema: Cinema) {
     this.selectedCinema = this.deepCopy(cinema);
     this.originalCinema = cinema;
@@ -476,6 +533,11 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Deletes the selected cinema if there is one.
+   *
+   * @return {void}
+   */
   deleteCinema() {
     if (this.selectedCinema) {
       this.adminEditorService.deleteCinema(this.selectedCinema).subscribe({
@@ -499,6 +561,12 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Initializes a new cinema by resetting the original cinema, loading the cinemas, and setting the selected cinema to a new cinema object.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
   addNewCinema() {
     this.originalCinema = null;
     this.loadCinemas();
@@ -517,6 +585,15 @@ export class AdminEditorComponent implements OnInit {
   //
   //
 
+  /**
+   * Loads the projections by making a GET request to the adminEditorService.
+   * Updates the class variable projections with the received data.
+   * Logs a success message if the projections are loaded successfully.
+   * Logs an error message if there is an error while loading the projections.
+   * Logs a message if no projections are found.
+   * Logs a message if an unknown error occurs.
+   * Executes the code when the observable completes, if necessary.
+   */
   loadProjections() {
     this.adminEditorService.getProjections().subscribe({
       next: (data: Projection[]) => {
@@ -538,6 +615,11 @@ export class AdminEditorComponent implements OnInit {
     });
   }
 
+  /**
+   * Selects a projection.
+   *
+   * @param {Projection} projection - The projection to be selected.
+   */
   selectProjection(projection: Projection) {
     this.selectedProjection = this.deepCopy(projection);
     this.originalProjection = projection;
@@ -602,6 +684,11 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Deletes the selected projection.
+   *
+   * @return {void}
+   */
   deleteProjection() {
     if (this.selectedProjection) {
       this.adminEditorService
@@ -630,6 +717,12 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Adds a new projection.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
   addNewProjection() {
     this.originalProjection = null;
     this.loadProjections();
@@ -647,6 +740,11 @@ export class AdminEditorComponent implements OnInit {
   //
   //
 
+  /**
+   * Loads the rooms by making a request to the admin editor service.
+   *
+   * @return {void}
+   */
   loadRooms() {
     this.adminEditorService.getRooms().subscribe({
       next: (data: Room[]) => {
@@ -668,6 +766,11 @@ export class AdminEditorComponent implements OnInit {
     });
   }
 
+  /**
+   * Selects a room.
+   *
+   * @param {Room} room - The room to be selected.
+   */
   selectRoom(room: Room) {
     this.selectedRoom = this.deepCopy(room);
     this.originalRoom = room;
@@ -787,6 +890,11 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Deletes a room.
+   *
+   * @return {void} This function does not return anything.
+   */
   deleteRoom() {
     if (this.selectedRoom) {
       this.adminEditorService.deleteRoom(this.selectedRoom).subscribe({
@@ -810,6 +918,14 @@ export class AdminEditorComponent implements OnInit {
     }
   }
 
+  /**
+   * Initializes a new room by setting the original room to null,
+   * loading the rooms, and setting the selected room to a new room object
+   * with default values.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
   addNewRoom() {
     this.originalRoom = null;
     this.loadRooms();

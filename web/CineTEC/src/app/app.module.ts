@@ -14,6 +14,7 @@ import { AdminEditorComponent } from './admin-editor/admin-editor.component';
 import { AdminLoginService } from './services/admin-login.service';
 import { AdminEditorService } from './services/admin-editor.service';
 
+/* The `@NgModule` decorator is used to define a module in Angular. It is a metadata object that specifies how the module should be compiled and run. */
 @NgModule({
   imports: [
     BrowserModule,
