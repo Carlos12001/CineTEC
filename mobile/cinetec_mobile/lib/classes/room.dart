@@ -1,15 +1,11 @@
-/* 
- Clase encargada de manejar la información de cada pelicula
- Parametros: nombre original, nombre comercial, path imagen, duracion, protagonistas
-             director, puntuacion
- */
+/// The `Room` class represents a room in a theater, with properties such as id, number of rows and
+/// columns, theater name, and a list of projection ids.
 class Room {
   String id;
   int rows;
   int columns;
-  String theaterName; // Duración en minutos
+  String theaterName;
   List<String> projectionId;
- 
 
   // Constructor
   Room({
@@ -20,4 +16,14 @@ class Room {
     required this.projectionId,
   });
 
+  // Metodo que permite construir un objeto Room a partir de un json
+  factory Room.fromJson(Map<String, dynamic> json) {
+    return Room(
+      id: json['id'],
+      rows: json['rows'],
+      columns: json['columns'],
+      theaterName: json['theaterName'],
+      projectionId: List<String>.from(json['projectionId']),
+    );
+  }
 }

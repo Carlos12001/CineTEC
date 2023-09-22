@@ -29,7 +29,7 @@ Future<List<Cinema>> fetchCinemas() async {
   realiza una conexion mediante el API en IIS express 
 */
 Future<List<Movie>> fetchMovies() async {
-  final response = await http.get(Uri.parse("$baseURL/api/movies"));
+  final response = await http.get(Uri.parse("$baseURL/api/movie"));
   if (response.statusCode == 200) {
     // Si el servidor devuelve una respuesta 200 OK,
     // entonces parsea el JSON.

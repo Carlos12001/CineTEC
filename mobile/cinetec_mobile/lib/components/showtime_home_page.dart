@@ -59,33 +59,45 @@ Expanded carteleraHomePage(List<Movie>? moviesList) {
                             height: 120,
                             child: FittedBox(
                                 fit: BoxFit.fill,
-                                child: Image.asset(peliculaActual.imagen)),
+                                child: Image.network(peliculaActual.imagen)),
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                "Pelicula: ${peliculaActual.cname}",
-                                style: const TextStyle(color: Color(0xFFfdfcfc)),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${peliculaActual.rating}",
-                                    style: const TextStyle(color: Color(0xFFfdfcfc)),
-                                  ),
-                                  Text(
-                                    "${peliculaActual.duration} min",
-                                    style: const TextStyle(color: Color(0xFFfdfcfc)),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                "Director: ${peliculaActual.director}",
-                                style: const TextStyle(color: Color(0xFFfdfcfc)),
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment:CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "Pelicula: ${peliculaActual.cname}",
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 3,
+                                  style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${peliculaActual.rating}",
+                                      overflow: TextOverflow.fade,
+                                      maxLines: 2,
+                                      style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                    ),
+                                    Text(
+                                      "${peliculaActual.duration} min",
+                                      overflow: TextOverflow.fade,
+                                      maxLines: 2,
+                                      style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  "Director: ${peliculaActual.director}",
+                                  overflow: TextOverflow.fade,
+                                      maxLines: 2,
+                                  style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

@@ -79,7 +79,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       height: 170,
                       child: FittedBox(
                           fit: BoxFit.fill,
-                          child: Image.asset(peliculaN.imagen)),
+                          child: Image.network(peliculaN.imagen)),
                     ),
                     Column(
                       children: [

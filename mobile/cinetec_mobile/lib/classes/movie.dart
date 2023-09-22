@@ -7,7 +7,7 @@ class Movie {
   String oname;
   String cname;
   String imagen;
-  int duration; // Duración en minutos
+  String duration; // Duración en minutos
   List<String> prota;
   String director;
   String rating;
@@ -28,9 +28,9 @@ class Movie {
     return Movie(
       oname: json['oname'],
       cname: json['cname'],
-      imagen: json['imagen'],
+      imagen: json['image'],
       duration: json['duration'],
-      prota: json['prota'],
+      prota: List<String>.from(json['prota']),
       director: json['director'],
       rating: json['rating'],
     );

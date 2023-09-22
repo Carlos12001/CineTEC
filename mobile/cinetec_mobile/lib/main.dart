@@ -9,7 +9,6 @@ void main() {
   runApp(const MyApp());
 }
 
-
 /// The `MyApp` class is a StatelessWidget that represents the main application widget for a mobile app
 /// called "cineTEC mobile".
 class MyApp extends StatelessWidget {
@@ -87,11 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
   _fetchCinemas() async {
     try {
       List<Cinema> fetchedCinemas = await fetchCinemas();
-      List<Movie> fetchedMovies = await fetchMovies();
       setState(() {
         print("fetched cinemas");
         cinemas = fetchedCinemas;
-        movies = fetchedMovies;
       });
     } catch (e) {
       setState(() {
@@ -101,7 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-    _fetchMovies() async {
+  /// The function `_fetchMovies` fetches movies and updates the state with the fetched movies or an error
+  /// message if the fetch fails.
+  _fetchMovies() async {
     try {
       List<Movie> fetchedMovies = await fetchMovies();
       setState(() {
@@ -145,9 +144,12 @@ class _MyHomePageState extends State<MyHomePage> {
         homePage(movies),
         locationPage(cinemas),
         Container(
-          color: Colors.blue,
+          color: Color(0xFF222222),
           alignment: Alignment.center,
-          child: const Text('Page 3'),
+          child: const Text(
+            'Proximamente...',
+            style: const TextStyle(fontSize: 30, color: Color(0xFFfdfcfc)),
+          ),
         ),
       ][_selectedIndex],
     );
