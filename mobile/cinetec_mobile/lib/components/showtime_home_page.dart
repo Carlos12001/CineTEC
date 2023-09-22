@@ -2,12 +2,20 @@ import 'package:cinetec_mobile/classes/movie.dart';
 import 'package:cinetec_mobile/components/movie_details_page.dart';
 import 'package:flutter/material.dart';
 
-Expanded carteleraHomePage() {
+/// The function `carteleraHomePage` returns an expanded widget that displays a list of movies with
+/// their details and allows navigation to a movie details page.
+/// 
+/// Args:
+///   moviesList (List<Movie>): The moviesList parameter is a list of Movie objects.
+/// 
+/// Returns:
+///   an Expanded widget.
+Expanded carteleraHomePage(List<Movie>? moviesList) {
   return Expanded(
     flex: 4,
     child: FutureBuilder<List<Movie>>(
       future:
-          obtenerListaDePeliculas(), // Aquí se supone que tendrías una función que retorna Future<List<Movie>>
+          obtenerListaDePeliculas(moviesList), // Aquí se supone que tendrías una función que retorna Future<List<Movie>>
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -51,33 +59,45 @@ Expanded carteleraHomePage() {
                             height: 120,
                             child: FittedBox(
                                 fit: BoxFit.fill,
-                                child: Image.asset(peliculaActual.imagen)),
+                                child: Image.network(peliculaActual.imagen)),
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                "Pelicula: ${peliculaActual.cname}",
-                                style: const TextStyle(color: Color(0xFFfdfcfc)),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${peliculaActual.rating}",
-                                    style: const TextStyle(color: Color(0xFFfdfcfc)),
-                                  ),
-                                  Text(
-                                    "${peliculaActual.duration} min",
-                                    style: const TextStyle(color: Color(0xFFfdfcfc)),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                "Director: ${peliculaActual.director}",
-                                style: const TextStyle(color: Color(0xFFfdfcfc)),
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment:CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "Pelicula: ${peliculaActual.cname}",
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 3,
+                                  style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${peliculaActual.rating}",
+                                      overflow: TextOverflow.fade,
+                                      maxLines: 2,
+                                      style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                    ),
+                                    Text(
+                                      "${peliculaActual.duration} min",
+                                      overflow: TextOverflow.fade,
+                                      maxLines: 2,
+                                      style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  "Director: ${peliculaActual.director}",
+                                  overflow: TextOverflow.fade,
+                                      maxLines: 2,
+                                  style: const TextStyle(color: Color(0xFFfdfcfc)),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -95,50 +115,21 @@ Expanded carteleraHomePage() {
   );
 }
 
-Future<List<Movie>> obtenerListaDePeliculas() async {
-  Movie pelicula1 = Movie(
-      oname: "Star wars",
-      cname: "Star wars",
-      imagen: "lib/resources/pelicula1.jpg",
-      duration: 123,
-      prota: ["Anakin, asoka"],
-      director: "Nolan",
-      rating: "M12");
-  Movie pelicula2 = Movie(
-      oname: "The Dark Knight",
-      cname: "El caballero de la noche",
-      imagen: "lib/resources/pelicula2.jpg",
-      duration: 152,
-      prota: ["Christian Bale", "Heath Ledger"],
-      director: "Christopher Nolan",
-      rating: "M15");
-
-  Movie pelicula3 = Movie(
-      oname: "Inception",
-      cname: "El origen",
-      imagen: "lib/resources/pelicula3.jpg",
-      duration: 148,
-      prota: ["Leonardo DiCaprio", "Ellen Page"],
-      director: "Christopher Nolan",
-      rating: "M13");
-
-  Movie pelicula4 = Movie(
-      oname: "Avengers: Endgame",
-      cname: "Avengers: Fin del juego",
-      imagen: "lib/resources/pelicula4.jpg",
-      duration: 181,
-      prota: ["Robert Downey Jr.", "Chris Evans"],
-      director: "Anthony and Joe Russo",
-      rating: "M12");
-
-  Movie pelicula5 = Movie(
-      oname: "Jurassic Park",
-      cname: "Parque Jurásico",
-      imagen: "lib/resources/pelicula5.jpg",
-      duration: 127,
-      prota: ["Sam Neill", "Laura Dern"],
-      director: "Steven Spielberg",
-      rating: "M10");
-
-  return [pelicula1, pelicula2, pelicula3, pelicula4, pelicula5];
+/// The function "obtenerListaDePeliculas" returns a list of movies if the input list is not null,
+/// otherwise it returns an empty list.
+/// 
+/// Args:
+///   moviessList (List<Movie>): The parameter "moviessList" is a nullable List of Movie objects.
+/// 
+/// Returns:
+///   The function `obtenerListaDePeliculas` returns a `Future` that resolves to a `List<Movie>`. If the
+/// `moviessList` parameter is not null, it returns the `moviessList`. Otherwise, it returns an empty
+/// list `[]`.
+Future<List<Movie>> obtenerListaDePeliculas(List<Movie>? moviessList) async {
+  if(moviessList != null){
+    return moviessList;
+  } else{
+    return [];
+  }
+  
 }

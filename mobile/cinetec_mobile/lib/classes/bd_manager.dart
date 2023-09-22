@@ -1,12 +1,17 @@
 import 'dart:convert';
-
+import 'package:cinetec_mobile/classes/movie.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:cinetec_mobile/classes/cinema.dart';
 
+// Url de ngrok para acceder API
+String baseURL = "https://63f3-186-176-152-196.ngrok-free.app";
+
+/* 
+  Metodo encargado de obtener los cines desde la base de datos
+  realiza una conexion mediante el API en IIS express 
+*/
 Future<List<Cinema>> fetchCinemas() async {
-  final response = await http
-      .get(Uri.parse("https://6bbe-186-176-152-196.ngrok-free.app/api/cinema"));
+  final response = await http.get(Uri.parse("$baseURL/api/cinema"));
   if (response.statusCode == 200) {
     // Si el servidor devuelve una respuesta 200 OK,
     // entonces parsea el JSON.
@@ -19,6 +24,28 @@ Future<List<Cinema>> fetchCinemas() async {
   }
 }
 
+/* 
+  Metodo encargado de obtener las peliculas desde la base de datos
+  realiza una conexion mediante el API en IIS express 
+*/
+Future<List<Movie>> fetchMovies() async {
+  final response = await http.get(Uri.parse("$baseURL/api/movie"));
+  if (response.statusCode == 200) {
+    // Si el servidor devuelve una respuesta 200 OK,
+    // entonces parsea el JSON.
+    Iterable list = jsonDecode(response.body);
+    return list.map((movie) => Movie.fromJson(movie)).toList();
+  } else {
+    // Si el servidor no devuelve una respuesta 200 OK,
+    // entonces lanza una excepción.
+    throw Exception('Failed to load movies');
+  }
+}
+
+/* 
+  Metodo encargado de obtener los paises de los cines
+  retorna una lista de strings 
+*/
 List<String> countryCinema(List<Cinema>? cinemas) {
   // Utilizamos un Set para evitar países duplicados
   Set<String> countriesC = {};
@@ -33,6 +60,10 @@ List<String> countryCinema(List<Cinema>? cinemas) {
   return countriesC.toList();
 }
 
+/* 
+  Metodo encargado de obtener las ciudades de los cines
+  retorna una lista de strings 
+*/
 List<String> cityCinema(List<Cinema>? cinemas) {
   // Utilizamos un Set para evitar países duplicados
   Set<String> cityC = {};
@@ -47,6 +78,10 @@ List<String> cityCinema(List<Cinema>? cinemas) {
   return cityC.toList();
 }
 
+/* 
+  Metodo encargado de obtener el nombre de los cines
+  retorna una lista de strings 
+*/
 List<String> theaterCinema(List<Cinema>? cinemas) {
   // Utilizamos un Set para evitar países duplicados
   Set<String> theaterC = {};
