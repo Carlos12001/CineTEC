@@ -1,0 +1,101 @@
+
+<head>
+  <title>Angular Image Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      overflow-y: auto;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh; /* Mínimo alto de la ventana */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px; /* Espacio entre imágenes */
+    }
+  
+
+    .image-container:hover {
+      transform: scale(1.05); /* Escala de imagen cuando pasa el ratón */ 
+    }
+    .image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+
+    
+
+    
+
+    .next-link {
+      width: 100px;
+      height: 30px;
+      margin-top: 10px;
+      background-color: #000;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      line-height: 30px;
+      display: block;
+      text-decoration: none; /* Elimina la decoración de enlace */
+    }
+
+    .next-link:hover {
+      background-color: #333; /* Cambia el color al pasar el ratón */
+    }
+
+    .footer {
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-gallery">
+
+      <<div class="image-container">
+        <a class="next-link" href="pagina1.html">El Cabellero de la Noche</a>
+        <img src="https://cinreservas.com/wp-content/uploads/2020/08/batman-2-WEB.png" alt="Image 1"/>
+      </div>
+
+      <div class="image-container">
+        <a class="next-link" href="pagina2.html">El Imperio Contraataca</a>
+        <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B92552B7CE9B7BB39BB3BDC551F35DB98C04740118F5B30975134814DF7A4E62/scale?width=1200&aspectRatio=1.78&format=jpeg" alt="Image 2">
+      </div>
+
+      <div class="image-container">
+        <a class="next-link" href="pagina3.html">La monja ll</a>
+        <img src="https://media.vandalsports.com/i/640x360/8-2023/2023899347_1.jpg" alt="Image 3">
+      </div>
+
+      <div class="image-container">
+        <a class="next-link" href="pagina4.html">Resitencia</a>
+        <img src="https://i.ytimg.com/vi/Qgsv4ChlMsw/maxresdefault.jpg" alt="Image 4">
+      </div>
+    </div>
+  </div>
+  <!-- Pie de página -->
+  <div class="footer">
+    © 2023 Derechos Reservados CineTEC
+  </div>
+</body>
+

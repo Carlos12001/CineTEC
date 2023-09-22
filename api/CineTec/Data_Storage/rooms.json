@@ -1,26 +1,51 @@
 [
-    {
-        "zipcode": 0,
-        "rows": 20,
-        "columns": 18,
-        "theatername": "cineTEC",
-        "projectionid":
-        [
-            2,
-            3,
-            6
-        ]
-    },
-    {
-        "zipcode": 1,
-        "rows": 30,
-        "columns": 10,
-        "theatername": "cineTEC2",
-        "projectionid":
-        [
-            1,
-            3,
-            4
-        ]
-    }
+  {
+    "id": "room1",
+    "rows": 20,
+    "columns": 18,
+    "theatername": "cineTEC",
+    "projectionid": [
+      "projection5",
+      "projection6",
+      "projection7"
+    ]
+  },
+  {
+    "id": "room2",
+    "rows": 30,
+    "columns": 10,
+    "theatername": "cineTEC2",
+    "projectionid": [
+      "projection1",
+      "projection2",
+      "projection3"
+    ]
+  },
+  {
+    "id": "room3",
+    "rows": 3,
+    "columns": 6,
+    "theatername": "cineTEC3",
+    "projectionid": [
+      "projection17"
+    ]
+  },
+  {
+    "id": "room4",
+    "rows": 7,
+    "columns": 12,
+    "theatername": "cineTEC3",
+    "projectionid": [
+      "projection18"
+    ]
+  },
+  {
+    "id": "room5",
+    "rows": 9,
+    "columns": 5,
+    "theatername": "cineTEC1",
+    "projectionid": [
+      "p1"
+    ]
+  }
 ]
