@@ -79,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _fetchCinemas();
+    _fetchMovies();
   }
 
   /// The function `_fetchCinemas` fetches cinemas and movies, updates the state with the fetched data,
@@ -95,6 +96,21 @@ class _MyHomePageState extends State<MyHomePage> {
     } catch (e) {
       setState(() {
         error = "Failed to fetch cinemas. ${e.toString()}";
+        print(error);
+      });
+    }
+  }
+
+    _fetchMovies() async {
+    try {
+      List<Movie> fetchedMovies = await fetchMovies();
+      setState(() {
+        print("fetched movies");
+        movies = fetchedMovies;
+      });
+    } catch (e) {
+      setState(() {
+        error = "Failed to fetch movies. ${e.toString()}";
         print(error);
       });
     }

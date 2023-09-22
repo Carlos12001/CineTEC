@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:cinetec_mobile/classes/cinema.dart';
 
 // Url de ngrok para acceder API
-String baseURL = "https://4959-186-176-152-196.ngrok-free.app";
+String baseURL = "https://63f3-186-176-152-196.ngrok-free.app";
 
 /* 
   Metodo encargado de obtener los cines desde la base de datos
