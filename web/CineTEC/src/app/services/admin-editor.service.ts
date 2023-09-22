@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Movie } from '../models/movies.model';
 import { Cinema } from '../models/cinema.model';
 import { Projection } from '../models/projection.model';
+import { Room } from '../models/room.model';
 
 @Injectable({
   providedIn: 'root',
@@ -101,6 +102,34 @@ export class AdminEditorService {
     return this.http.post<Projection[]>(
       this.url + 'api/projection/add',
       projection,
+      this.httpOptions
+    );
+  }
+
+  public getRooms(): Observable<Room[]> {
+    return this.http.get<Room[]>(this.url + 'api/room');
+  }
+
+  public deleteRoom(room: Room): Observable<Room[]> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'my-auth-token',
+      }),
+      body: room,
+    };
+
+    return this.http.request<Room[]>(
+      'DELETE',
+      `${this.url}api/room/delete`,
+      options
+    );
+  }
+
+  public addRoom(room: Room): Observable<Room[]> {
+    return this.http.post<Room[]>(
+      this.url + 'api/room/add',
+      room,
       this.httpOptions
     );
   }

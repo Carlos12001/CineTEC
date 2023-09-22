@@ -69,7 +69,7 @@ namespace CineTec.Controllers
             string newJson = JsonConvert.SerializeObject(rooms, Formatting.Indented);
             File.WriteAllText(pathroom, newJson);
 
-            return Ok("Room added successfully");
+            return Ok(rooms);
         }
 
         /**

@@ -9,10 +9,10 @@ namespace CineTec.Models
     public class Room
     {
         //sets and gets for every property
-        public int id { get; set; }
+        public string id { get; set; }
         public int rows { get; set; }
         public int columns { get; set; }
         public string theatername { get; set; }
-        public List<int> projectionid { get; set; }
+        public List<string> projectionid { get; set; }
     }
 }

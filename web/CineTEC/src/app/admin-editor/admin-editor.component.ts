@@ -7,6 +7,7 @@ import { Admin, admin } from '../models/admin.model';
 import { Movie } from '../models/movies.model';
 import { Cinema } from '../models/cinema.model';
 import { Projection } from '../models/projection.model';
+import { Room } from '../models/room.model';
 
 @Component({
   selector: 'app-admin-editor',
@@ -22,7 +23,7 @@ export class AdminEditorComponent implements OnInit {
     { label: 'Películas', value: 'movies' },
     { label: 'Sucursales', value: 'cinemas' },
     { label: 'Proyecciones', value: 'projections' },
-    { label: 'Salas', value: 'room' },
+    { label: 'Salas', value: 'rooms' },
   ];
 
   movies: Movie[] = [];
@@ -42,6 +43,12 @@ export class AdminEditorComponent implements OnInit {
   selectedProjection: Projection | null = null;
 
   originalProjection: Projection | null = null;
+
+  rooms: Room[] = [];
+
+  selectedRoom: Room | null = null;
+
+  originalRoom: Room | null = null;
 
   constructor(
     private router: Router,
@@ -89,6 +96,9 @@ export class AdminEditorComponent implements OnInit {
     this.projections = [];
     this.selectedProjection = null;
     this.originalProjection = null;
+    this.rooms = [];
+    this.selectedRoom = null;
+    this.originalRoom = null;
   }
 
   /**
@@ -118,6 +128,9 @@ export class AdminEditorComponent implements OnInit {
     }
     if (entity === 'projections') {
       this.loadProjections();
+    }
+    if (entity == 'rooms') {
+      this.loadRooms();
     }
   }
 
@@ -625,6 +638,187 @@ export class AdminEditorComponent implements OnInit {
       horary: '',
       roomid: '',
       movieid: '',
+    };
+  }
+
+  //
+  //
+  // ROOMS
+  //
+  //
+
+  loadRooms() {
+    this.adminEditorService.getRooms().subscribe({
+      next: (data: Room[]) => {
+        this.rooms = data; // Actualiza la variable de clase rooms con los datos recibidos
+        console.log('Salases cargadas exitosamente.');
+      },
+      error: (err: any) => {
+        console.error('Error al cargar las sucursales:', err);
+        if (err.status === 404) {
+          console.log('No se encontraron sucursales.');
+        } else {
+          console.log('Ocurrió un error desconocido.', err);
+        }
+      },
+      complete: () => {
+        // Código a ejecutar cuando el observable se completa, si es necesario.
+        console.log('La carga de sucursales se ha completado.');
+      },
+    });
+  }
+
+  selectRoom(room: Room) {
+    this.selectedRoom = this.deepCopy(room);
+    this.originalRoom = room;
+  }
+
+  /**
+   * Submitthe room.
+   *
+   * @param {type} paramName - description of parameter
+   * @return {type} description of return value
+   */
+  submitRoom() {
+    if (this.selectedRoom) {
+      if (this.selectedRoom.id === '--New Room--') {
+        const newName = window.prompt('Introduce el nuevo nombre de la sala');
+
+        if (newName === null || newName.trim() === '') {
+          console.log('Envío cancelado');
+          return;
+        }
+
+        const doesExist = this.rooms.some((room) => room.id === newName);
+
+        if (doesExist) {
+          window.alert(
+            'Ya existe una sala con el mismo nombre. Por favor, elige otro nombre.'
+          );
+          return;
+        } else {
+          this.selectedRoom.id = newName;
+        }
+      }
+      if (
+        JSON.stringify(this.originalRoom) === JSON.stringify(this.selectedRoom)
+      ) {
+        console.log('Ningún cambio detectado, envío cancelado.');
+        return;
+      }
+
+      if (this.selectedRoom != null) {
+        this.deleteRoom();
+      }
+
+      this.adminEditorService.addRoom(this.selectedRoom).subscribe({
+        next: (data: Room[]) => {
+          console.log('sala agregada o actualizada exitosamente.');
+          this.rooms = data;
+        },
+        error: (err: any) => {
+          console.error('Error al agregar o actualizar la sala:', err);
+          // Aquí puedes agregar más manejo de errores
+        },
+        complete: () => {
+          console.log('La operación de agregar o actualizar se ha completado.');
+        },
+      });
+    }
+  }
+
+  /**
+   * Adds a new item to the "projectionid" array of the selected room, if the
+   * selected room and "projectionid" array exist.
+   * @return {void} This function does not return anything.
+   */
+  addProjectionid() {
+    if (this.selectedRoom && this.selectedRoom.projectionid) {
+      this.selectedRoom.projectionid.push('');
+    }
+  }
+
+  /**
+   * Removes an element from the `projectionid` array of the `selectedRoom`
+   * object at the specified index.
+   *
+   * @param {number} index - The index of the element to be removed.
+   * @return {void} This function does not return anything.
+   */
+  removeProjectionid(index: number) {
+    if (this.selectedRoom && this.selectedRoom.projectionid) {
+      this.selectedRoom.projectionid.splice(index, 1);
+    }
+  }
+
+  /**
+   * Retrieves the safe projectionid at the specified index.
+   *
+   * @param {number} i - The index of the projectionid to retrieve.
+   * @return {string} The safe projectionid at the specified index, or an
+   * empty string if it does not exist.
+   */
+  getSafeProjectionid(i: number): string {
+    if (
+      this.selectedRoom &&
+      this.selectedRoom.projectionid &&
+      this.selectedRoom.projectionid.length > i
+    ) {
+      return this.selectedRoom.projectionid[i];
+    }
+    return '';
+  }
+
+  /**
+   * Sets the value of a specific element in the 'projectionid' array of the
+   * selected room.
+   *
+   * @param {number} i - The index of the element to set.
+   * @param {string} value - The value to set.
+   * @return {void} This function does not return any value.
+   */
+  setSafeProjectionid(i: number, value: string): void {
+    if (
+      this.selectedRoom &&
+      this.selectedRoom.projectionid &&
+      this.selectedRoom.projectionid.length > i
+    ) {
+      this.selectedRoom.projectionid[i] = value;
+    }
+  }
+
+  deleteRoom() {
+    if (this.selectedRoom) {
+      this.adminEditorService.deleteRoom(this.selectedRoom).subscribe({
+        next: (data: Room[]) => {
+          console.log('sala borrada exitosamente:', this.selectedRoom);
+          this.clearData();
+          this.rooms = data;
+        },
+        error: (err: any) => {
+          console.error('Error al borrar la sala:', err);
+          if (err.status === 404) {
+            console.log('La sala no se encontró.');
+          } else {
+            console.log('Ocurrió un error desconocido.', err);
+          }
+        },
+        complete: () => {
+          console.log('La operación de borrado se ha completado.');
+        },
+      });
+    }
+  }
+
+  addNewRoom() {
+    this.originalRoom = null;
+    this.loadRooms();
+    this.selectedRoom = {
+      id: '--New Room--',
+      rows: 0,
+      columns: 0,
+      theatername: '',
+      projectionid: [],
     };
   }
 }

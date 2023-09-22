@@ -98,6 +98,31 @@
           </div>
         </ng-template>
       </div>
+      <!-- ROOMS -->
+      <div *ngIf="selectedEntity === 'rooms'">
+        <button class="add-entity-btn" (click)="addNewRoom()">
+          <i class="fas fa-plus-circle"></i>
+          Agregar Sala
+        </button>
+
+        <ng-container *ngIf="rooms && rooms.length > 0; else noEntity">
+          <ul>
+            <li *ngFor="let room of rooms">
+              <button class="list-entities-btn" (click)="selectRoom(room)">
+                <div class="list-entities-info">
+                  <h2>{{ room.id }}</h2>
+                  <p>{{ room.rows }}</p>
+                </div>
+              </button>
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #noEntity>
+          <div class="no-entity-message">
+            <p>No se encontraron salas 🛋️</p>
+          </div>
+        </ng-template>
+      </div>
     </div>
 
     <!-- Editor -->
@@ -288,6 +313,69 @@
             (click)="deleteProjection()"
           >
             Eliminar Proyección
+          </button>
+        </form>
+      </div>
+      <!-- ROOMS -->
+      <div *ngIf="selectedEntity === 'rooms' && selectedRoom != null">
+        <h2>Editando: {{ selectedRoom.id }}</h2>
+        <form>
+          <div class="form-group">
+            <label for="rows">Filas:</label>
+            <input id="rows" [(ngModel)]="selectedRoom.rows" name="rows" />
+          </div>
+          <div class="form-group">
+            <label for="columns">Columnas:</label>
+            <input
+              id="columns"
+              [(ngModel)]="selectedRoom.columns"
+              name="projectionid"
+            />
+          </div>
+          <div class="form-group">
+            <label for="theatername">Nombre de Sucursal:</label>
+            <input
+              id="theatername"
+              [(ngModel)]="selectedRoom.theatername"
+              name="theatername"
+            />
+          </div>
+          <div class="form-group list-container">
+            <label>ID Proyección:</label>
+            <div
+              *ngFor="
+                let projectionid of selectedRoom?.projectionid;
+                let i = index;
+                trackBy: trackByFunction
+              "
+            >
+              <input
+                [ngModel]="getSafeProjectionid(i)"
+                (ngModelChange)="setSafeProjectionid(i, $event)"
+                name="projectionid{{ i }}"
+              />
+              <button type="button" (click)="removeProjectionid(i)">
+                <i class="fas fa-trash"></i> Eliminar Projectionid
+              </button>
+            </div>
+            <button type="button" (click)="addProjectionid()">
+              <i class="fas fa-plus"></i> Agregar Projectionid
+            </button>
+          </div>
+          <button
+            type="submit"
+            class="action-btn submit-btn"
+            (click)="submitRoom()"
+          >
+            Subir Salas
+          </button>
+          <button
+            *ngIf="selectedRoom.id !== '--New Room--'"
+            type="button"
+            class="action-btn delete-btn"
+            (click)="deleteRoom()"
+          >
+            Eliminar Salas
           </button>
         </form>
       </div>
